@@ -5,7 +5,7 @@ Internal resource for Sanofi's Competitive Intelligence work, part of Vaccine Pe
 Public, official sources only. No confidential Sanofi data.
 
 ## Pages
-- Company profiles: Sanofi, Moderna, GSK, MSD, Pfizer, AstraZeneca
+- Company profiles: Sanofi, Moderna, GSK, MSD, Pfizer, AstraZeneca, Eli Lilly
 - Learn: Vaccine basics, Marketplace, Price types and rules, Glossary
 - Today: Competitor news, Sanofi update (7-day news log)
 

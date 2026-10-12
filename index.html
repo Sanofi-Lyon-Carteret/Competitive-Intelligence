@@ -1,0 +1,740 @@
+<title>Vaccine Market Atlas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=Source+Sans+3:wght@400;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: fixed left rail of company pages, one scrolling report column; data blocks are flat panels, only KPI tiles get a fill */
+:root{
+  --bg:#FFFFFF; --surface:#F6F2FC; --line:#E4DCEF; --fg:#080000; --muted:#5B5466;
+  --violet:#7A00E6; --violet-soft:#EFE3FD; --blue:#0082BA; --lblue:#00A0E9;
+  --victoria:#444492; --lime:#ACB317; --smoke:#BCA36A;
+  --warn-bg:#FFF6DB; --warn-fg:#6B5200; --neg:#C2410C; --pos:#2F7D32;
+  --f-display:"Manrope",Arial,sans-serif; --f-body:"Source Sans 3",Arial,sans-serif; --f-data:"IBM Plex Mono",Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#110C18; --surface:#1B1426; --line:#2E2540; --fg:#F4F1F8; --muted:#A9A1B5;
+  --violet:#B57BFF; --violet-soft:#2A1A42; --blue:#3AB0E0; --lblue:#5CC4F2;
+  --victoria:#8A8AD6; --lime:#C5CC4A; --smoke:#D4BF8A; --warn-bg:#3A2F0A; --warn-fg:#F2D57A; --neg:#FB923C; --pos:#86D38A; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#110C18; --surface:#1B1426; --line:#2E2540; --fg:#F4F1F8; --muted:#A9A1B5;
+  --violet:#B57BFF; --violet-soft:#2A1A42; --blue:#3AB0E0; --lblue:#5CC4F2;
+  --victoria:#8A8AD6; --lime:#C5CC4A; --smoke:#D4BF8A; --warn-bg:#3A2F0A; --warn-fg:#F2D57A; --neg:#FB923C; --pos:#86D38A; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:16px;line-height:1.5}
+a{color:var(--violet)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--violet);outline-offset:2px}
+.app{display:grid;grid-template-columns:230px minmax(0,1fr);min-height:100%}
+nav.rail{border-right:1px solid var(--line);padding:24px 16px;position:sticky;top:env(safe-area-inset-top,0px);height:100vh;overflow:auto}
+.brand{font-family:var(--f-display);font-weight:800;font-size:17px;letter-spacing:-.01em}
+.brand small{display:block;font-family:var(--f-body);font-weight:400;font-size:13px;color:var(--muted);margin-top:2px}
+.logo-slot{border:1px dashed var(--line);border-radius:6px;padding:8px;font-size:12px;color:var(--muted);text-align:center;margin-bottom:18px}
+.rail h4{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:22px 0 8px}
+.rail ul{list-style:none;padding:0;margin:0;display:grid;gap:2px}
+.rail li a,.rail li span{display:flex;justify-content:space-between;align-items:center;padding:7px 10px;border-radius:6px;text-decoration:none;color:var(--fg);font-size:15px}
+.rail li a:hover{background:var(--surface)}
+.rail li a.active{background:var(--violet-soft);color:var(--violet);font-weight:600}
+.rail li span{color:var(--muted)}
+.rail li span em{font-style:normal;font-size:11px}
+main{padding-block:28px 64px;padding-inline:clamp(16px,4vw,48px);max-width:1080px;min-width:0}
+.eyebrow{font-family:var(--f-data);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--f-display);font-weight:800;font-size:clamp(30px,5vw,44px);letter-spacing:-.02em;margin:6px 0 4px;text-wrap:balance}
+h1 .dot{color:var(--violet)}
+.lede{color:var(--muted);max-width:62ch;margin:0}
+.meta{display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:14px;font-size:13px;color:var(--muted)}
+.meta b{color:var(--fg);font-weight:600}
+section{margin-top:44px}
+.sec-head{display:flex;align-items:baseline;gap:12px;border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:16px}
+.sec-head .n{font-family:var(--f-data);font-size:12px;color:var(--violet)}
+h2{font-family:var(--f-display);font-weight:700;font-size:21px;margin:0;letter-spacing:-.01em}
+.call-title{font-size:15px;margin:0 0 12px}
+.acr{margin:16px 0 0;padding-top:10px;border-top:1px dashed var(--line);font-size:13px;color:var(--muted);display:flex;flex-wrap:wrap;gap:4px 14px;max-width:none}
+.acr b{color:var(--fg);font-weight:600;width:100%}
+.acr abbr{text-decoration:none;font-family:var(--f-data);color:var(--violet);font-weight:500}
+#head .acr{margin-top:14px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.kpi{background:var(--surface);border-radius:10px;padding:16px}
+.kpi .v{font-family:var(--f-display);font-weight:800;font-size:30px;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.kpi .l{font-size:14px;color:var(--muted)}
+.kpi .d{font-family:var(--f-data);font-size:12px;margin-top:6px}
+.neg{color:var(--neg)}.pos{color:var(--pos)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:14px}
+.chip b{color:var(--violet);font-weight:600;margin-right:4px}
+.grid2{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,2fr);gap:24px}
+.chart-wrap{overflow-x:auto}
+.chart-title{font-weight:600;font-size:14px;margin-bottom:6px}
+svg text{fill:var(--muted);font-family:var(--f-data);font-size:11px}
+svg .val{fill:var(--fg);font-weight:500}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:13px;color:var(--muted);margin-top:8px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+.tbl{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:14.5px;min-width:560px}
+th{text-align:left;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600;border-bottom:1px solid var(--line);padding:8px 10px}
+td{border-bottom:1px solid var(--line);padding:9px 10px;vertical-align:top}
+td.num{font-family:var(--f-data);font-variant-numeric:tabular-nums;white-space:nowrap}
+.phase{display:inline-block;font-family:var(--f-data);font-size:11.5px;padding:2px 8px;border-radius:4px;background:var(--violet-soft);color:var(--violet);white-space:nowrap}
+.tv{display:inline-block;background:var(--warn-bg);color:var(--warn-fg);font-size:12px;font-weight:600;padding:1px 7px;border-radius:4px;white-space:nowrap}
+sup a{font-family:var(--f-data);font-size:10.5px;text-decoration:none;margin-left:1px}
+.timeline{list-style:none;padding:0;margin:0;display:grid}
+.timeline li{display:grid;grid-template-columns:120px minmax(0,1fr);gap:16px;padding:12px 0;border-bottom:1px solid var(--line)}
+.timeline .date{font-family:var(--f-data);font-size:13px;color:var(--muted)}
+.timeline .what{font-weight:600}
+.timeline .sub{font-size:14px;color:var(--muted)}
+.takeaways{display:grid;gap:10px;padding:0;margin:0;list-style:none}
+.takeaways li{display:grid;grid-template-columns:22px minmax(0,1fr);gap:8px}
+.takeaways li::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--violet);margin-top:8px}
+.note{font-size:13.5px;color:var(--muted);margin-top:10px;max-width:70ch}
+.sources ol{padding-left:22px;margin:0;display:grid;gap:6px;font-size:14px}
+.sec2{font-size:11px;color:var(--warn-fg);background:var(--warn-bg);padding:0 6px;border-radius:4px;margin-left:6px}
+.view[hidden]{display:none!important}
+.lens{margin:14px 0 0;font-size:14.5px;background:var(--surface);border-radius:8px;padding:10px 14px;max-width:78ch}
+.lens b{display:block;font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--violet);margin-bottom:2px}
+.flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.flow .st{background:var(--surface);border-radius:10px;padding:14px;position:relative}
+.flow .st:not(:last-child)::after{content:"→";position:absolute;right:-13px;top:44%;color:var(--violet);font-weight:700}
+.flow .k{font-family:var(--f-data);font-size:12px;color:var(--violet)}
+.flow h3,.fam h3{font-family:var(--f-display);font-size:16px;margin:4px 0 6px}
+.flow p{margin:0;font-size:14px;color:var(--muted)}
+.fam{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-bottom:18px}
+.fam .col{border-top:4px solid var(--c);padding-top:8px}
+.fam .col span{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:3px 10px;font-size:13.5px;margin:4px 6px 0 0}
+.dotc{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:7px;vertical-align:0}
+.steps{display:flex;gap:8px;overflow-x:auto;padding-bottom:8px;margin:0;list-style:none;padding-left:0}
+.steps li{flex:0 0 150px;border:1px solid var(--line);border-radius:8px;padding:10px 12px}
+.steps li.ph{background:var(--violet-soft);border-color:transparent}
+.steps .k{font-family:var(--f-data);font-size:12px;color:var(--violet);font-weight:500}
+.steps p{margin:4px 0 0;font-size:13.5px;color:var(--muted)}
+svg .ax{fill:var(--muted)}
+.disclaimer{background:var(--warn-bg);color:var(--warn-fg);font-size:13px;padding:8px 12px;border-radius:6px;margin:0 0 20px;max-width:none}
+footer{margin-top:40px;font-size:13px;color:var(--muted);border-top:1px solid var(--line);padding-top:14px}
+@media (max-width:820px){
+  .flow{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .flow .st::after{display:none}
+  .fam{grid-template-columns:minmax(0,1fr)}
+  .app{grid-template-columns:minmax(0,1fr)}
+  nav.rail{position:static;height:auto;border-right:0;border-bottom:1px solid var(--line);padding:14px 16px}
+  .rail ul{grid-auto-flow:column;grid-auto-columns:max-content;overflow-x:auto}
+  .rail h4:not(:first-of-type),.rail ul.more{display:none}
+  .grid2{grid-template-columns:minmax(0,1fr)}
+  .timeline li{grid-template-columns:minmax(0,1fr);gap:2px}
+}
+</style>
+
+<!-- ============================================================
+     EDIT HERE: every company's text, numbers and sources live in the
+     JSON block below, one entry per company ("sanofi", "moderna" ...).
+     Change a value and the page and charts update.
+     Rules: official sources only; no dashes in text; write
+     "TO VERIFY" for anything not yet checked.
+     To add a company: copy one entry, rename the key, add a menu link
+     with href="#key".
+     ============================================================ -->
+<script id="page-data" type="application/json">
+{
+"sanofi": {
+  "company": "Sanofi",
+  "hq": "Paris, France",
+  "ceo": "Belén Garijo",
+  "lastUpdated": "9 October 2026",
+  "dataThrough": "Q2 2026 results (30 July 2026)",
+  "intro": "Vaccines leader in influenza, pediatric combinations and infant RSV protection. Vaccines are one of three core areas, next to immunology and rare diseases.",
+  "kpis": [
+    {"v":"€43.6bn","l":"Group sales, FY 2025","d":"+9.9% at CER","dir":"pos","src":[3]},
+    {"v":"€7.9bn","l":"Vaccines sales, FY 2025","d":"-1.2% at CER","dir":"neg","src":[3]},
+    {"v":"18%","l":"Vaccines share of sales, FY 2025","d":"Calculated: 7,936 / 43,600","dir":"","src":[3]},
+    {"v":"€1.15bn","l":"Vaccines sales, Q2 2026","d":"-4.7% at CER","dir":"neg","src":[1]}
+  ],
+  "strategy": [
+    {"k":"Lead","t":"influenza and RSV infant protection"},
+    {"k":"Combine","t":"respiratory vaccines: flu+COVID, RSV+hMPV"},
+    {"k":"Expand","t":"adult vaccines via Heplisav-B (hepatitis B)"},
+    {"k":"Next-gen","t":"21-valent pneumococcal vaccine with SK bioscience"},
+    {"k":"Build","t":"flexible Evolutive Vaccine Facilities"},
+    {"k":"Prioritise","t":"China growth; Head of Vaccines now leads China"}
+  ],
+  "strategySrc": [1,9,12,13,15],
+  "rev": {
+    "title":"Quarterly vaccines sales (€m)", "cur":"€", "max":4000, "ticks":[0,1000,2000,3000,4000],
+    "quarters": ["Q3 24","Q4 24","Q1 25","Q2 25","Q3 25","Q4 25","Q1 26","Q2 26"],
+    "values": [3802,2177,1326,1214,3357,2039,1293,1150],
+    "src": [1,2,3,4,5,6,7,8],
+    "note": "Q1 2025 calculated: H1 2025 (€2,540m) minus Q2 2025 (€1,214m). Q3 peaks come from flu season deliveries."
+  },
+  "mix": {
+    "title":"FY 2025 vaccines sales by franchise (€m)",
+    "items":[
+      {"k":"Polio / Pertussis / Hib","v":2554,"c":"--violet"},
+      {"k":"Influenza, COVID-19","v":2314,"c":"--blue"},
+      {"k":"Beyfortus (RSV)","v":1781,"c":"--lblue"},
+      {"k":"Meningitis, travel, endemic","v":1287,"c":"--victoria"}
+    ],
+    "src":[3]
+  },
+  "portfolio": [
+    {"p":"Fluzone High-Dose / Efluelda","d":"Influenza","t":"High-dose inactivated","m":"US, Europe; label extension 50+ filed (US, EU)","src":[2]},
+    {"p":"Beyfortus (nirsevimab)","d":"RSV, infants","t":"Monoclonal antibody (with AstraZeneca)","m":"More than 45 countries","src":[2]},
+    {"p":"Nuvaxovid (with Novavax)","d":"COVID-19","t":"Protein-based, non-mRNA","m":"Mainly Europe (Q1 2026)","src":[2,3]},
+    {"p":"Heplisav-B","d":"Hepatitis B, adults","t":"Adjuvanted, 2 doses in 1 month","m":"United States","src":[9,10]},
+    {"p":"PPH franchise","d":"Polio, pertussis, Hib","t":"Pediatric combinations and boosters","m":"Global; China hit by fewer births","src":[1,2]},
+    {"p":"Meningitis, travel, endemic","d":"Meningococcal and travel","t":"TO VERIFY by product","m":"US largest; Europe growing","src":[2]}
+  ],
+  "pipeline": [
+    {"n":"Fluzone HD / Efluelda 50+","d":"Influenza, adults 50+","ph":"Filed","st":"Submission accepted US and EU","src":[2]},
+    {"n":"PCV21 (SP0202)","d":"Pneumococcal, children","ph":"Phase 3","st":"Started Dec 2024, with SK bioscience","src":[15]},
+    {"n":"SP0125","d":"RSV","ph":"Phase 2","st":"Live-attenuated, intranasal","src":[18]},
+    {"n":"SP0256","d":"RSV + hMPV","ph":"Phase 1/2","st":"Bivalent","src":[18]},
+    {"n":"VXB-241 (from Vicebio)","d":"RSV + hMPV, older adults","ph":"Phase 1","st":"Molecular Clamp, non-mRNA","src":[18]},
+    {"n":"SP0291","d":"RSV + hMPV + PIV3","ph":"Phase 1","st":"mRNA, early stage","src":[18]},
+    {"n":"Flu + COVID combinations","d":"Adults 50+","ph":"TO VERIFY","st":"US fast track; positive data cited","src":[15]},
+    {"n":"SP0340","d":"hMPV + RSV","ph":"TO VERIFY","st":"US fast track (Q2 2026)","src":[1]},
+    {"n":"Shingles candidate (from Dynavax)","d":"Herpes zoster","ph":"TO VERIFY","st":"Acquired with Dynavax","src":[10]}
+  ],
+  "pipelineNote": "Selected vaccine candidates named in public sources. Sanofi reports 61 projects in total across all areas (Q2 2026); the full vaccine list is in the pipeline appendix of the results presentation.",
+  "pipelineSrc": [1],
+  "deals": [
+    {"date":"Feb 2026","what":"Dynavax Technologies acquired","sub":"Adds Heplisav-B and a shingles candidate. Purchase price €1,571m.","type":"Acquisition","src":[10]},
+    {"date":"Dec 2025","what":"Vicebio acquisition completed","sub":"RSV + hMPV candidate, Molecular Clamp platform. $1.15bn upfront, up to $450m milestones.","type":"Acquisition","src":[11]},
+    {"date":"Apr 2025","what":"CDC supply agreement","sub":"Beyfortus and other vaccines for the US CDC. About $2bn total order.","type":"Supply","src":[6]},
+    {"date":"Dec 2024","what":"SK bioscience deal expanded","sub":"Next-gen pneumococcal vaccines, children and adults. €50m upfront; co-funded R&D.","type":"Licensing","src":[15]},
+    {"date":"May 2024","what":"Novavax partnership","sub":"Co-commercialise Nuvaxovid; develop flu + COVID combinations. Terms TO VERIFY.","type":"Licensing","src":[]}
+  ],
+  "tenders": [
+    {"date":"Apr 2025","buyer":"US CDC","country":"United States","product":"Beyfortus and other vaccines","value":"About $2bn","src":[6]},
+    {"date":"TO VERIFY","buyer":"European national tenders","country":"For example, Germany","product":"Influenza","value":"Not public","src":[4]}
+  ],
+  "tenderNote": "Germany flu: Sanofi cites competitive price pressure (Q3 2025). Add public tender awards from TED (EU) and national portals here.",
+  "plants": [
+    {"site":"Modulus (EVF)","country":"Singapore","tech":"Modular, multi-platform including mRNA and antibodies","cap":"Up to 4 products at once; full operation mid-2026","src":[13,14]},
+    {"site":"EVF Neuville-sur-Saône","country":"France","tech":"Modular, multi-platform","cap":"Part of €900m two-site plan","src":[13]},
+    {"site":"Beyfortus supply","country":"Partner network","tech":"Made by AstraZeneca","cap":"Second external filling line added 2024","src":[8]},
+    {"site":"SK bioscience base","country":"South Korea","tech":"Pneumococcal conjugate","cap":"Co-financed by Sanofi","src":[15]}
+  ],
+  "call": {
+    "title":"Q2 2026 results, 30 July 2026",
+    "points":[
+      {"t":"Vaccines €1.15bn, -4.7%: high flu comparison, weak Southern Hemisphere season","src":[1,12]},
+      {"t":"Beyfortus +54% to €108m; Heplisav-B supports PPH franchise","src":[1,12]},
+      {"t":"FY 2026 vaccines guided slightly negative, impact in H2","src":[12]},
+      {"t":"Lower US vaccination rates weigh on respiratory and pediatric vaccines","src":[12]},
+      {"t":"2030 ambition: vaccines sales of about €9bn","src":[12]}
+    ]
+  },
+  "sources": [
+    {"id":1,"t":"Q2 2026 results press release (Form 6-K)","o":"Sanofi / SEC","u":"https://www.sec.gov/Archives/edgar/data/0001121404/000112140426000008/pressreleaseq22026english.htm"},
+    {"id":2,"t":"Q1 2026 results press release (Form 6-K)","o":"Sanofi / SEC","u":"https://www.sec.gov/Archives/edgar/data/0001121404/000112140426000004/pressreleaseq12026english.htm"},
+    {"id":3,"t":"Q4 and FY 2025 results press release (Form 6-K)","o":"Sanofi / SEC","u":"https://www.sec.gov/Archives/edgar/data/1121404/000112140426000001/pressreleaseq42025english.htm"},
+    {"id":4,"t":"Q3 2025 results press release (Form 6-K)","o":"Sanofi / SEC","u":"https://www.sec.gov/Archives/edgar/data/1121404/000112140425000026/pressreleaseq32025english.htm"},
+    {"id":5,"t":"Q2 2025 results press release (Form 6-K)","o":"Sanofi / SEC","u":"https://www.sec.gov/Archives/edgar/data/1121404/000112140425000020/pressreleaseq22025english.htm"},
+    {"id":6,"t":"Half-year management report 2025","o":"Sanofi / SEC","u":"https://www.sec.gov/Archives/edgar/data/1121404/000119312525250744/d69958dex992.htm"},
+    {"id":7,"t":"Q4 and FY 2024 results press release (Form 6-K)","o":"Sanofi / SEC","u":"https://www.sec.gov/Archives/edgar/data/1121404/000112140425000002/pressreleaseq42024english.htm"},
+    {"id":8,"t":"Q3 2024 results press release (Form 6-K)","o":"Sanofi / SEC","u":"https://www.sec.gov/Archives/edgar/data/1121404/000112140424000020/pressreleaseq32024english.htm"},
+    {"id":9,"t":"Half-year management report 2026","o":"Sanofi / SEC","u":"https://www.sec.gov/Archives/edgar/data/0001121404/000162828026050803/exhibit992-2026halfyearman.htm"},
+    {"id":10,"t":"Half-year financial statements 2026 (Dynavax acquisition note)","o":"Sanofi / SEC","u":"https://www.sec.gov/Archives/edgar/data/0001121404/000162828026050803/sny-20260630_d2.htm"},
+    {"id":11,"t":"Press release: Sanofi completes acquisition of Vicebio, 4 Dec 2025 (republished copy)","o":"Sanofi","u":"https://www.placera.se/pressmeddelanden/sanofi-press-release-sanofi-completes-acquisition-of-vicebio-20251204","secondary":true},
+    {"id":12,"t":"Q2 2026 earnings call highlights","o":"MarketBeat summary of Sanofi call","u":"https://www.marketbeat.com/instant-alerts/sanofi-q2-earnings-call-highlights-2026-07-30/","secondary":true},
+    {"id":13,"t":"Sanofi breaks ground on Evolutive Vaccine Facility in Asia","o":"Singapore Economic Development Board","u":"https://edb.gov.sg/en/about-edb/media-releases-publications/sanofi-breaks-ground-on-first-of-its-kind-evolutive-vaccine-facility-in-asia.html"},
+    {"id":14,"t":"Sanofi opens $595M vaccine facility in Singapore","o":"Pharma Manufacturing","u":"https://pharmamanufacturing.com/industry-news/news/55246600/sanofi-opens-595m-vaccine-manufacturing-facility-in-singapore","secondary":true},
+    {"id":15,"t":"Sanofi and SK bioscience expand pneumococcal vaccine collaboration","o":"PMLiVE, citing Sanofi release","u":"https://pmlive.com/pharma_news/sanofi-and-sk-bioscience-expand-pneumococcal-vaccine-collaboration/","secondary":true},
+    {"id":18,"t":"Sanofi Vicebio acquisition and RSV pipeline overview","o":"MedCity News","u":"https://medcitynews.com/2025/07/sanofi-vicebio-acquisition-combination-vaccine-rsv-hmpv-piv3-san-sny/","secondary":true}
+  ]
+},
+"moderna": {
+  "company": "Moderna",
+  "hq": "Cambridge, Massachusetts, US",
+  "ceo": "TO VERIFY",
+  "lastUpdated": "9 October 2026",
+  "dataThrough": "Q2 2026 results",
+  "intro": "mRNA specialist. All marketed products are respiratory vaccines: COVID-19, RSV and, since August 2026 in the US, influenza. Reports in US dollars.",
+  "kpis": [
+    {"v":"$1.94bn","l":"Total revenue, FY 2025","d":"-40% vs FY 2024 ($3.24bn)","dir":"neg","src":[3]},
+    {"v":"94%","l":"Product sales share of revenue, FY 2025","d":"All product sales are vaccines. Calculated: 1,818 / 1,944","dir":"","src":[3]},
+    {"v":"$145m","l":"Total revenue, Q2 2026","d":"+2% vs Q2 2025 ($142m)","dir":"pos","src":[1]},
+    {"v":"$6.9bn","l":"Cash and investments, 30 June 2026","d":"Year-end 2026 guide: $4.7bn to $5.2bn","dir":"neg","src":[1]}
+  ],
+  "strategy": [
+    {"k":"Launch","t":"mFLUSIVA (flu), mCOMBRIAX (flu+COVID), mNEXSPIKE"},
+    {"k":"Go global","t":"long-term government partnerships: UK, Canada, Australia, Mexico, Taiwan"},
+    {"k":"Localise","t":"manufacturing in UK, Canada, Australia"},
+    {"k":"Cut","t":"operating costs, about $2.2bn lower in 2025"},
+    {"k":"Diversify","t":"oncology with Merck, rare diseases"}
+  ],
+  "strategySrc": [1,2,3],
+  "rev": {
+    "title":"Quarterly total revenue ($m)", "cur":"$", "max":2000, "ticks":[0,500,1000,1500,2000],
+    "quarters": ["Q3 24","Q4 24","Q1 25","Q2 25","Q3 25","Q4 25","Q1 26","Q2 26"],
+    "values": [1862,966,108,142,1016,678,389,145],
+    "src": [1,2,3,4],
+    "note": "Total revenue includes small other revenue (partnerships, grants). Moderna does not split sales by product in its 2026 releases."
+  },
+  "mix": {
+    "title":"FY 2025 revenue by region ($m)",
+    "items":[
+      {"k":"United States","v":1200,"c":"--violet"},
+      {"k":"International","v":745,"c":"--lblue"}
+    ],
+    "src":[3],
+    "note":"US figure rounded to $1.2bn in source."
+  },
+  "portfolio": [
+    {"p":"Spikevax","d":"COVID-19","t":"mRNA","m":"Global","src":[3]},
+    {"p":"mNEXSPIKE","d":"COVID-19, next generation","t":"mRNA","m":"US, EU, Japan, Taiwan","src":[1,2,3]},
+    {"p":"mRESVIA","d":"RSV, adults","t":"mRNA","m":"US, EU (18+), Australia, Mexico","src":[1,2,3]},
+    {"p":"mFLUSIVA (mRNA-1010)","d":"Influenza, adults 50+","t":"mRNA","m":"US approved 5 Aug 2026; launch 2026/27 season","src":[5]},
+    {"p":"mCOMBRIAX (mRNA-1083)","d":"Flu + COVID-19","t":"mRNA combination","m":"EU approved","src":[1,2]}
+  ],
+  "pipeline": [
+    {"n":"mRNA-1083 (mCOMBRIAX)","d":"Flu + COVID, outside EU","ph":"Filed","st":"Review in Japan, Canada, Australia; US refiling pending","src":[1]},
+    {"n":"mRNA-1010 (mFLUSIVA)","d":"Influenza, outside US","ph":"Filed","st":"Review in EU, Canada, Australia","src":[1,5]},
+    {"n":"mRNA-1403","d":"Norovirus","ph":"Phase 3","st":"Interim did not meet early success; trial continues","src":[1]},
+    {"n":"mRNA-1018","d":"Pandemic influenza","ph":"Phase 3","st":"Supported by CEPI","src":[2]},
+    {"n":"Intismeran (mRNA-4157)","d":"Oncology: melanoma, lung (with Merck)","ph":"Phase 3","st":"Melanoma data possible in 2026","src":[1,2]},
+    {"n":"mRNA-4359","d":"Oncology","ph":"Phase 1/2","st":"Phase 2 readout possible in 2026","src":[2]},
+    {"n":"mRNA-3927","d":"Rare disease: propionic acidemia","ph":"Registrational","st":"Fully enrolled; data possible in 2026","src":[1]},
+    {"n":"mRNA-3705","d":"Rare disease: methylmalonic acidemia","ph":"Planned","st":"Pivotal trial decision after PA data","src":[1]}
+  ],
+  "pipelineNote": "Selected programs from results releases. Vaccine programs first; oncology and rare disease shown for context.",
+  "pipelineSrc": [1,2],
+  "deals": [
+    {"date":"Q2 2026","what":"EU joint procurement for mRESVIA","sub":"European Commission contract for 6 countries, up to 24 million doses.","type":"Supply","src":[1]},
+    {"date":"Q2 2026","what":"Brazil manufacturing collaboration","sub":"Local manufacturer supports a COVID vaccine supply agreement.","type":"Partnership","src":[1]},
+    {"date":"Q1 2026","what":"Arbutus / Genevant settlement","sub":"Ends all related patent litigation. $950m paid July 2026.","type":"Litigation","src":[1,2]},
+    {"date":"Q1 2026","what":"CEPI pandemic flu","sub":"Funding support for mRNA-1018 Phase 3.","type":"Partnership","src":[2]},
+    {"date":"Q4 2025","what":"Mexico and Taiwan agreements","sub":"Long-term respiratory vaccine agreements.","type":"Supply","src":[3]},
+    {"date":"Q4 2025","what":"Recordati collaboration","sub":"Global commercialisation of propionic acidemia candidate.","type":"Licensing","src":[3]},
+    {"date":"Ongoing","what":"Merck oncology collaboration","sub":"Co-development of intismeran autogene.","type":"Partnership","src":[3]}
+  ],
+  "tenders": [
+    {"date":"Q2 2026","buyer":"European Commission (6 countries)","country":"EU","product":"mRESVIA","value":"Up to 24m doses","src":[1]},
+    {"date":"Q2 2026","buyer":"Brazil","country":"Brazil","product":"COVID vaccine","value":"Not public","src":[1]},
+    {"date":"Q1 2026","buyer":"UK government","country":"United Kingdom","product":"Respiratory vaccines (first shipment)","value":"Not public","src":[2]},
+    {"date":"Q4 2025","buyer":"Mexico; Taiwan","country":"Mexico, Taiwan","product":"Respiratory vaccines","value":"Not public","src":[3]}
+  ],
+  "tenderNote": "Partnership values are not disclosed in results releases. Check TED (EU) and national procurement portals for award notices.",
+  "plants": [
+    {"site":"UK manufacturing and R&D site","country":"United Kingdom","tech":"mRNA","cap":"Licensed by MHRA (2025)","src":[4]},
+    {"site":"Canada site","country":"Canada","tech":"mRNA","cap":"First made-in-Canada doses delivered (2025)","src":[4]},
+    {"site":"Australia site","country":"Australia","tech":"mRNA","cap":"GMP licence from TGA (2025)","src":[4]},
+    {"site":"US main site","country":"United States","tech":"mRNA","cap":"TO VERIFY","src":[]}
+  ],
+  "call": {
+    "title":"Q2 2026 results and business update",
+    "points":[
+      {"t":"Revenue $145m, flat: UK deliveries offset lower US and South America COVID sales","src":[1]},
+      {"t":"2026 guide: up to 10% growth, about 50% US and 50% international","src":[1]},
+      {"t":"About 55% of second-half revenue expected in Q3","src":[1]},
+      {"t":"mFLUSIVA approved in US on 5 Aug 2026, ready for 2026/27 season","src":[5]},
+      {"t":"Costs falling: R&D guide about $2.9bn; norovirus interim not met","src":[1]}
+    ]
+  },
+  "sources": [
+    {"id":1,"t":"Q2 2026 financial results press release (Form 8-K)","o":"Moderna / SEC","u":"https://www.sec.gov/Archives/edgar/data/0001682852/000168285226000147/exhibit9912026q2pressrelea.htm"},
+    {"id":2,"t":"Q1 2026 financial results press release (Form 8-K)","o":"Moderna / SEC","u":"https://www.sec.gov/Archives/edgar/data/0001682852/000168285226000057/exhibit9912026q1pressrelea.htm"},
+    {"id":3,"t":"Q4 and FY 2025 financial results press release (Form 8-K)","o":"Moderna / SEC","u":"https://www.sec.gov/Archives/edgar/data/1682852/000168285226000015/exhibit9912025q4pressrelea.htm"},
+    {"id":4,"t":"Q3 2025 financial results press release (Form 8-K)","o":"Moderna / SEC","u":"https://www.sec.gov/Archives/edgar/data/1682852/000168285225000073/exhibit9912025q3pressrelea.htm"},
+    {"id":5,"t":"Moderna receives US FDA approval for influenza vaccine mFLUSIVA (republished press release)","o":"Moderna, via BioSpace","u":"https://www.biospace.com/press-releases/moderna-receives-u-s-fda-approval-for-influenza-vaccine-mflusiva","secondary":true}
+  ]
+}
+}
+</script>
+
+<!-- ACRONYMS: every acronym used on the page, with its full form.
+     Each section lists the ones it uses automatically.
+     Add a new line here whenever you add a new acronym. -->
+<script id="glossary" type="application/json">
+[
+  {"k":"CER","v":"constant exchange rates (growth with currency effects removed)"},
+  {"k":"FY","v":"fiscal year"},
+  {"k":"Q1 to Q4","re":"\\bQ[1-4]\\b","v":"first, second, third and fourth quarter of the year"},
+  {"k":"H1 / H2","re":"\\bH[12]\\b","v":"first half / second half of the year"},
+  {"k":"HQ","v":"headquarters"},
+  {"k":"CEO","v":"Chief Executive Officer"},
+  {"k":"bn","re":"\\dbn\\b","v":"billion"},
+  {"k":"m","re":"\\dm\\b|€m|\\$m","v":"million"},
+  {"k":"vs","re":"\\bvs\\b","v":"versus, compared with"},
+  {"k":"R&D","v":"research and development"},
+  {"k":"M&A","v":"mergers and acquisitions"},
+  {"k":"US","v":"United States"},
+  {"k":"UK","v":"United Kingdom"},
+  {"k":"EU","v":"European Union"},
+  {"k":"COVID-19","re":"COVID","v":"coronavirus disease 2019"},
+  {"k":"RSV","v":"respiratory syncytial virus"},
+  {"k":"hMPV","re":"hMPV|HMPV","v":"human metapneumovirus"},
+  {"k":"PIV3","v":"parainfluenza virus type 3"},
+  {"k":"PPH","v":"polio, pertussis (whooping cough) and Hib vaccines"},
+  {"k":"Hib","v":"Haemophilus influenzae type b"},
+  {"k":"PCV21","v":"21-valent pneumococcal conjugate vaccine (covers 21 bacteria types)"},
+  {"k":"HD","v":"high-dose"},
+  {"k":"mRNA","v":"messenger ribonucleic acid"},
+  {"k":"EVF","v":"Evolutive Vaccine Facility, Sanofi's modular plant design"},
+  {"k":"CDC","v":"Centers for Disease Control and Prevention (US public health agency)"},
+  {"k":"FDA","v":"Food and Drug Administration (US medicines regulator)"},
+  {"k":"MHRA","v":"Medicines and Healthcare products Regulatory Agency (UK regulator)"},
+  {"k":"TGA","v":"Therapeutic Goods Administration (Australian regulator)"},
+  {"k":"GMP","v":"Good Manufacturing Practice"},
+  {"k":"CEPI","v":"Coalition for Epidemic Preparedness Innovations"},
+  {"k":"PA","v":"propionic acidemia, a rare inherited metabolic disease"},
+  {"k":"TED","v":"Tenders Electronic Daily, the EU public procurement journal"},
+  {"k":"SEC","v":"Securities and Exchange Commission (US financial markets regulator)"},
+  {"k":"Form 6-K","re":"6-K","v":"report a non-US listed company files with the SEC"},
+  {"k":"Form 8-K","re":"8-K","v":"current report a US listed company files with the SEC"},
+  {"k":"WHO","v":"World Health Organization"},
+  {"k":"HHS","v":"US Department of Health and Human Services"},
+  {"k":"EMA","v":"European Medicines Agency"},
+  {"k":"CHMP","v":"Committee for Medicinal Products for Human Use (EMA committee that recommends approval)"},
+  {"k":"IND","v":"Investigational New Drug application, needed before testing in people in the US"},
+  {"k":"BLA","v":"Biologics License Application, the US approval file for a vaccine"},
+  {"k":"ACIP","v":"Advisory Committee on Immunization Practices (advises CDC on who should be vaccinated)"},
+  {"k":"VAERS","v":"Vaccine Adverse Event Reporting System (US early warning system for side effects)"},
+  {"k":"VSD","v":"Vaccine Safety Datalink (US safety monitoring network)"},
+  {"k":"DNA","v":"deoxyribonucleic acid, the genetic code"},
+  {"k":"MMR","v":"measles, mumps and rubella vaccine"},
+  {"k":"DTaP","v":"diphtheria, tetanus and acellular pertussis vaccine for children"},
+  {"k":"HPV","v":"human papillomavirus"},
+  {"k":"HA","v":"hemagglutinin, the main protein on the surface of the flu virus"},
+  {"k":"MPL","v":"monophosphoryl lipid A, an adjuvant ingredient"},
+  {"k":"CpG","v":"cytosine phosphate guanine, a DNA pattern used as an adjuvant"},
+  {"k":"HIV","v":"human immunodeficiency virus"}
+]
+</script>
+
+<!-- VACCINE BASICS PAGE: all text and sources for the Learn > Vaccine basics page. -->
+<script id="basics-data" type="application/json">
+{
+  "title":"Vaccine basics",
+  "intro":"The science you need to read pipelines, results and competitor news. Plain words, official health agency sources only.",
+  "lastUpdated":"9 October 2026",
+  "how":{
+    "steps":[
+      {"t":"Show the antigen","d":"The vaccine carries an antigen: a weakened or killed germ, a piece of it, its genetic material, or a toxin made harmless.","src":[1]},
+      {"t":"Train the defence","d":"White blood cells multiply and make antibodies, proteins that find and neutralise the germ.","src":[1]},
+      {"t":"Keep a few on watch","d":"When the threat is gone, cell numbers drop, but a few stay on watch. The person is now immunised.","src":[1]},
+      {"t":"Allow time","d":"Immunity can take weeks to build. Vaccinated people who get sick are far less likely to become seriously ill.","src":[1]}
+    ],
+    "lens":{"t":"How strong and how long the response lasts decides the number of doses, the need for boosters, and many competitive claims.","src":[]}
+  },
+  "immunity":[
+    {"type":"Active immunity","from":"The person's own immune system, after vaccination or infection","speed":"Takes longer to build","dur":"Years, often for life","ex":"Most vaccines","src":[1,3]},
+    {"type":"Passive immunity","from":"Ready-made antibodies from another person or animal, including monoclonal antibodies","speed":"Works right away","dur":"Fades within weeks to months","ex":"RSV monoclonal antibodies for infants","src":[1,3]}
+  ],
+  "immunityLens":{"t":"Beyfortus is a monoclonal antibody (passive immunity), not a vaccine. Sanofi still reports it inside Vaccines sales.","src":[11]},
+  "families":[
+    {"name":"Whole germ","c":"--violet","items":["Live-attenuated","Inactivated"]},
+    {"name":"Piece of the germ","c":"--blue","items":["Subunit and recombinant","Polysaccharide and conjugate","Toxoid"]},
+    {"name":"Genetic instructions","c":"--victoria","items":["mRNA","Viral vector"]}
+  ],
+  "tech":[
+    {"n":"Live-attenuated","f":"--violet","in":"A weakened form of the germ","plus":"Strong, long-lasting response, often 1 or 2 doses","minus":"Not for some people with weak immune systems; sensitive to heat and light","ex":"MMR, rotavirus, chickenpox, yellow fever","src":[2,3]},
+    {"n":"Inactivated","f":"--violet","in":"A killed version of the germ","plus":"Cannot cause disease, even in people with weak immune systems","minus":"Weaker response; several doses or boosters","ex":"Hepatitis A, flu, polio, rabies","src":[2,3]},
+    {"n":"Subunit and recombinant","f":"--blue","in":"Specific pieces such as a protein; recombinant ones are made by cells or yeast using DNA technology","plus":"Targeted response; usable in nearly everyone, including people with weak immune systems","minus":"Boosters may be needed","ex":"Hepatitis B, HPV, shingles, recombinant flu","src":[2,3]},
+    {"n":"Polysaccharide and conjugate","f":"--blue","in":"The sugar coat of the germ; in a conjugate, the sugar is linked to a protein","plus":"Conjugation makes the vaccine work in children under 2","minus":"Plain polysaccharide works poorly in children under 2","ex":"Hib, pneumococcal, meningococcal","src":[2,3]},
+    {"n":"Toxoid","f":"--blue","in":"The germ's toxin, made harmless","plus":"Response targets the toxin that causes illness","minus":"Boosters may be needed","ex":"Diphtheria, tetanus","src":[2,3]},
+    {"n":"mRNA","f":"--victoria","in":"Genetic instructions so the body's own cells make a germ protein","plus":"Short manufacturing time; no live virus","minus":"TO VERIFY","ex":"COVID-19, RSV and flu products (see Moderna page)","src":[2,10]},
+    {"n":"Viral vector","f":"--victoria","in":"A modified, different virus delivers the instructions","plus":"Used in Ebola outbreaks","minus":"TO VERIFY","ex":"Ebola; studied for Zika, flu and HIV","src":[2]}
+  ],
+  "adjNote":"Most modern vaccines contain only small germ pieces. Adjuvants help them trigger a strong enough response. Adjuvanted vaccines can cause more redness, pain, fever or aches.",
+  "adjuvants":[
+    {"a":"Aluminium salts","what":"Used since the 1930s","in":"DTaP, hepatitis A and B, HPV, pneumococcal and meningococcal B vaccines"},
+    {"a":"AS01B","what":"MPL and QS-21 in liposomes","in":"Shingrix (shingles)"},
+    {"a":"MF59","what":"Oil-in-water emulsion with squalene","in":"Fluad (flu, adults 65+)"},
+    {"a":"CpG 1018","what":"Synthetic DNA that mimics germ genetic material","in":"Heplisav-B (hepatitis B)"},
+    {"a":"Matrix-M","what":"Soapbark tree saponins with cholesterol and phospholipids","in":"Novavax COVID-19 vaccine (Nuvaxovid)"}
+  ],
+  "adjSrc":[4],
+  "adjLens":{"t":"Two adjuvanted vaccines in this table, Heplisav-B and Nuvaxovid, are now sold by Sanofi.","src":[11]},
+  "flu":[
+    {"m":"Egg-based","how":"Virus grown in fertilised chicken eggs for several days, then harvested","since":"In use for more than 70 years","out":"Inactivated shots and nasal spray"},
+    {"m":"Cell-based","how":"Virus grown in cultured mammal cells","since":"FDA approval 2012","out":"Inactivated shots; one US maker (Seqirus)"},
+    {"m":"Recombinant","how":"The HA gene is put into host cells that make the HA protein; no eggs, no flu virus needed","since":"FDA approval 2013","out":"One US product (Flublok)"}
+  ],
+  "fluSrc":[5,3],
+  "fluNote":"Flu vaccines target the three flu viruses expected to circulate most in the coming season, so they are updated every year.",
+  "fluLens":{"t":"mRNA is now a fourth way to make flu vaccines: Moderna's mFLUSIVA was approved in the US in August 2026.","src":[10]},
+  "dev":[
+    {"k":"Research","t":"Lab research, often 10 to 15 years"},
+    {"k":"Preclinical","t":"Tests in small animals"},
+    {"k":"IND","t":"US filing before testing in people"},
+    {"k":"Phase 1","t":"20 to 100 people: safety, immune response","ph":true},
+    {"k":"Phase 2","t":"100 to 300 people: more safety and immune data","ph":true},
+    {"k":"Phase 3","t":"1,000 to 3,000 people: confirm effectiveness and side effects","ph":true},
+    {"k":"Review","t":"US: FDA reviews a BLA. EU: EMA's CHMP recommends"},
+    {"k":"Recommend","t":"US: ACIP advises who should get it"},
+    {"k":"Phase 4","t":"Studies after approval; safety monitoring through VAERS and VSD","ph":true}
+  ],
+  "devSrc":[6,7],
+  "sizes":[
+    {"k":"Phase 1","lo":20,"hi":100,"src":[6]},
+    {"k":"Phase 2","lo":100,"hi":300,"src":[6]},
+    {"k":"Phase 3","lo":1000,"hi":3000,"src":[6]},
+    {"k":"Real example: mFLUSIVA Phase 3","lo":40805,"hi":40805,"src":[10]}
+  ],
+  "devLens":{"t":"CDC gives typical sizes; real Phase 3 trials can be far larger. When a competitor moves a candidate to a new phase, check the trial size and comparator on ClinicalTrials.gov.","src":[6,10]},
+  "measures":[
+    {"t":"Efficacy","d":"How much a vaccine lowers disease risk compared with placebo, in a controlled trial. 80% means 80% lower risk.","w":"Clinical trials","src":[8]},
+    {"t":"Effectiveness","d":"How well the vaccine works in everyday use, across a larger, more varied population","w":"Real-world studies","src":[8]},
+    {"t":"Relative vaccine efficacy","d":"Efficacy compared with an already licensed vaccine instead of a placebo","w":"Trials, for example mFLUSIVA against a standard-dose flu vaccine","src":[10]},
+    {"t":"Immune response","d":"Whether the body produces antibodies and other defences after vaccination","w":"Phase 1 to 3 trials; basis of mFLUSIVA's accelerated approval in adults 65+","src":[6,10]},
+    {"t":"Primary series and booster","d":"The doses needed for full protection, and later doses to keep protection up","w":"Trials, then effectiveness studies","src":[8]},
+    {"t":"Valency","d":"How many strains or types a vaccine covers. Flu vaccines cover 3 viruses; PCV21 covers 21 pneumococcal types.","w":"Product label","src":[5]}
+  ],
+  "cold":[
+    {"t":"Each vaccine has its own storage conditions, set in its package insert.","src":[9]},
+    {"t":"Good storage keeps vaccines effective, avoids revaccination and reduces waste.","src":[9]},
+    {"t":"Live-attenuated vaccines are sensitive to heat and light.","src":[3]}
+  ],
+  "coldLens":{"t":"In tenders, check storage and shelf-life requirements alongside price.","src":[]},
+  "sources":[
+    {"id":1,"t":"Explaining How Vaccines Work","o":"CDC","u":"https://www.cdc.gov/vaccines/basics/explaining-how-vaccines-work.html"},
+    {"id":2,"t":"Vaccine Types","o":"HHS","u":"https://www.hhs.gov/immunization/basics/types/index.html"},
+    {"id":3,"t":"Pink Book, Chapter 1: Principles of Vaccination","o":"CDC","u":"https://www.cdc.gov/pinkbook/hcp/table-of-contents/chapter-1-principles-of-vaccination.html"},
+    {"id":4,"t":"Adjuvants and Vaccines","o":"CDC","u":"https://www.cdc.gov/vaccine-safety/about/adjuvants.html"},
+    {"id":5,"t":"How Influenza (Flu) Vaccines Are Made","o":"CDC","u":"https://www.cdc.gov/flu/vaccine-process/index.html"},
+    {"id":6,"t":"How Vaccines are Developed and Approved for Use","o":"CDC","u":"https://www.cdc.gov/vaccines/basics/how-developed-approved.html"},
+    {"id":7,"t":"How EMA evaluates medicines for human use","o":"EMA","u":"https://www.ema.europa.eu/en/about-us/what-we-do/authorisation-medicines/how-ema-evaluates-medicines"},
+    {"id":8,"t":"Vaccine efficacy, effectiveness and protection","o":"WHO","u":"https://www.who.int/news-room/feature-stories/detail/vaccine-efficacy-effectiveness-and-protection"},
+    {"id":9,"t":"Vaccine Storage and Handling","o":"CDC","u":"https://www.cdc.gov/vaccines/hcp/storage-handling/index.html"},
+    {"id":10,"t":"Moderna receives US FDA approval for influenza vaccine mFLUSIVA (republished press release)","o":"Moderna, via BioSpace","u":"https://www.biospace.com/press-releases/moderna-receives-u-s-fda-approval-for-influenza-vaccine-mflusiva","secondary":true},
+    {"id":11,"t":"Q1 2026 results press release (Form 6-K)","o":"Sanofi / SEC","u":"https://www.sec.gov/Archives/edgar/data/0001121404/000112140426000004/pressreleaseq12026english.htm"}
+  ]
+}
+</script>
+
+<div class="app">
+  <nav class="rail" aria-label="Companies">
+    <div class="logo-slot">Logo placeholder</div>
+    <div class="brand">Vaccine Market Atlas<small>Performance and Innovation onboarding</small></div>
+    <h4>Company profiles</h4>
+    <ul id="co-nav">
+      <li><a href="#sanofi" data-key="sanofi">Sanofi</a></li>
+      <li><a href="#moderna" data-key="moderna">Moderna</a></li>
+      <li><span>GSK <em>soon</em></span></li>
+      <li><span>MSD <em>soon</em></span></li>
+      <li><span>Pfizer <em>soon</em></span></li>
+      <li><span>AstraZeneca <em>soon</em></span></li>
+    </ul>
+    <h4>Learn</h4>
+    <ul id="learn-nav">
+      <li><a href="#basics" data-key="basics">Vaccine basics</a></li>
+      <li><span>Like I'm 5 <em>soon</em></span></li>
+      <li><span>Marketplace <em>soon</em></span></li>
+      <li><span>Price types <em>soon</em></span></li>
+      <li><span>Glossary <em>soon</em></span></li>
+    </ul>
+    <h4>Today</h4>
+    <ul class="more">
+      <li><span>Competitor news <em>soon</em></span></li>
+      <li><span>Sanofi update <em>soon</em></span></li>
+    </ul>
+  </nav>
+
+  <main id="top">
+   <p class="disclaimer" role="note"><b>Unofficial learning resource</b> created by an intern for onboarding. Not an official Sanofi website. Public information only.</p>
+   <div class="view" id="view-basics" hidden></div>
+   <div class="view" id="view-company">
+    <header id="head">
+      <div class="eyebrow">Company profile · Vaccines focus</div>
+      <h1 id="co-name"></h1>
+      <p class="lede" id="intro"></p>
+      <div class="meta" id="meta"></div>
+    </header>
+
+    <section>
+      <div class="sec-head"><span class="n">01</span><h2>Snapshot</h2></div>
+      <div class="kpis" id="kpis"></div>
+    </section>
+
+    <section>
+      <div class="sec-head"><span class="n">02</span><h2>Vaccine strategy</h2></div>
+      <div class="chips" id="chips"></div>
+    </section>
+
+    <section>
+      <div class="sec-head"><span class="n">03</span><h2>Vaccine revenue</h2></div>
+      <div class="grid2">
+        <div><div class="chart-wrap" id="bar"></div><p class="note" id="bar-note"></p></div>
+        <div><div class="chart-wrap" id="mix"></div><div class="legend" id="mix-legend"></div><p class="note" id="mix-note"></p></div>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-head"><span class="n">04</span><h2>Vaccine portfolio</h2></div>
+      <div class="tbl"><table><thead><tr><th>Product</th><th>Disease</th><th>Technology</th><th>Key markets</th></tr></thead><tbody id="port"></tbody></table></div>
+    </section>
+
+    <section>
+      <div class="sec-head"><span class="n">05</span><h2>Pipeline</h2></div>
+      <div class="chart-wrap" id="phasebar"></div>
+      <div class="tbl" style="margin-top:14px"><table><thead><tr><th>Candidate</th><th>Target</th><th>Phase</th><th>Status</th></tr></thead><tbody id="pipe"></tbody></table></div>
+      <p class="note" id="pipe-note"></p>
+    </section>
+
+    <section>
+      <div class="sec-head"><span class="n">06</span><h2>M&amp;A and partnerships</h2></div>
+      <ul class="timeline" id="tl"></ul>
+    </section>
+
+    <section>
+      <div class="sec-head"><span class="n">07</span><h2>Tenders and supply deals</h2></div>
+      <div class="tbl"><table><thead><tr><th>Date</th><th>Buyer</th><th>Country</th><th>Product</th><th>Value</th></tr></thead><tbody id="tend"></tbody></table></div>
+      <p class="note" id="tend-note"></p>
+    </section>
+
+    <section>
+      <div class="sec-head"><span class="n">08</span><h2>Manufacturing</h2></div>
+      <div class="tbl"><table><thead><tr><th>Site</th><th>Country</th><th>Technology</th><th>Capacity</th></tr></thead><tbody id="mfg"></tbody></table></div>
+    </section>
+
+    <section>
+      <div class="sec-head"><span class="n">09</span><h2>Latest results update</h2></div>
+      <p class="call-title" id="call-title"></p>
+      <ul class="takeaways" id="pts"></ul>
+    </section>
+
+    <section class="sources">
+      <div class="sec-head"><span class="n">10</span><h2>Sources</h2></div>
+      <ol id="src"></ol>
+      <p class="note">Items marked <span class="sec2" style="margin:0">secondary</span> report on official material; replace with the original company document when updating. Items marked <span class="tv">TO VERIFY</span> are not yet confirmed.</p>
+    </section>
+
+   </div>
+    <footer id="foot"></footer>
+  </main>
+</div>
+
+<script>
+(function(){
+  const ALL = JSON.parse(document.getElementById('page-data').textContent);
+  const $ = id => document.getElementById(id);
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const tv = s => esc(s).replace(/TO VERIFY/g,'<span class="tv">TO VERIFY</span>');
+  const cite = (arr,pre) => (arr||[]).length ? '<sup>' + arr.map(n => '<a href="#'+(pre||'s')+n+'" title="Source '+n+'">['+n+']</a>').join('') + '</sup>' : ' <span class="tv">TO VERIFY</span>';
+  const BASICS = JSON.parse(document.getElementById('basics-data').textContent);
+  const css = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+  const fmt = n => n.toLocaleString('en');
+  const PHASES = ['Planned','Phase 1','Phase 1/2','Phase 2','Phase 3','Registrational','Filed','TO VERIFY'];
+  let D;
+
+  function drawBar(){
+    const r=D.rev, W=560,H=240,L=46,R=8,T=18,B=34, n=r.values.length;
+    const cw=(W-L-R)/n, bw=cw*0.62;
+    let s='<svg viewBox="0 0 '+W+' '+H+'" width="100%" style="min-width:420px" role="img" aria-label="'+esc(r.title)+'">';
+    r.ticks.forEach(t=>{const y=T+(H-T-B)*(1-t/r.max); s+='<line x1="'+L+'" x2="'+(W-R)+'" y1="'+y+'" y2="'+y+'" stroke="'+css('--line')+'"/><text x="'+(L-6)+'" y="'+(y+4)+'" text-anchor="end">'+(t===0?'0':r.cur+(t/1000)+'bn')+'</text>';});
+    r.values.forEach((v,i)=>{
+      const h=(H-T-B)*(v/r.max), x=L+i*cw+(cw-bw)/2, y=H-B-h, last=i===n-1;
+      s+='<rect x="'+x+'" y="'+y+'" width="'+bw+'" height="'+h+'" rx="3" fill="'+(last?css('--violet'):css('--victoria'))+'" opacity="'+(last?1:.55)+'"><title>'+r.quarters[i]+': '+r.cur+fmt(v)+'m</title></rect>';
+      s+='<text class="val" x="'+(x+bw/2)+'" y="'+(y-5)+'" text-anchor="middle">'+fmt(v)+'</text>';
+      s+='<text x="'+(x+bw/2)+'" y="'+(H-B+16)+'" text-anchor="middle">'+r.quarters[i]+'</text>';
+    });
+    $('bar').innerHTML='<div class="chart-title">'+esc(r.title)+cite(r.src)+'</div>'+s+'</svg>';
+    $('bar-note').textContent=r.note||'';
+  }
+  function drawMix(){
+    const m=D.mix, tot=m.items.reduce((a,b)=>a+b.v,0), W=340,H=64; let x=0;
+    let s='<div class="chart-title">'+esc(m.title)+cite(m.src)+'</div><svg viewBox="0 0 '+W+' '+H+'" width="100%" role="img" aria-label="'+esc(m.title)+'">';
+    m.items.forEach(it=>{const w=W*it.v/tot; s+='<rect x="'+x+'" y="0" width="'+Math.max(w-2,0)+'" height="34" rx="3" fill="'+css(it.c)+'"><title>'+esc(it.k)+': '+fmt(it.v)+'</title></rect><text class="val" x="'+(x+4)+'" y="52">'+Math.round(it.v/tot*100)+'%</text>'; x+=w;});
+    $('mix').innerHTML=s+'</svg>';
+    $('mix-legend').innerHTML=m.items.map(it=>'<span><i style="background:'+css(it.c)+'"></i>'+esc(it.k)+' · '+fmt(it.v)+'</span>').join('');
+    $('mix-note').textContent=m.note||'';
+  }
+  function drawPhases(){
+    const order=PHASES.filter(p=>D.pipeline.some(x=>x.ph===p)), counts=order.map(p=>D.pipeline.filter(x=>x.ph===p).length);
+    const rowH=22, W=560, L=100, R=30, H=order.length*rowH+8, max=Math.max(...counts,1);
+    let s='<div class="chart-title">Selected candidates by phase</div><svg viewBox="0 0 '+W+' '+H+'" width="100%" style="min-width:380px" role="img" aria-label="Pipeline candidates by phase">';
+    order.forEach((p,i)=>{const y=4+i*rowH, w=(W-L-R)*counts[i]/max, unk=p==='TO VERIFY';
+      s+='<text x="'+(L-8)+'" y="'+(y+13)+'" text-anchor="end">'+p+'</text><rect x="'+L+'" y="'+y+'" width="'+w+'" height="16" rx="3" fill="'+(unk?css('--smoke'):css('--violet'))+'" opacity="'+(unk?.7:.4+i*.09)+'"/><text class="val" x="'+(L+w+6)+'" y="'+(y+13)+'">'+counts[i]+'</text>';});
+    $('phasebar').innerHTML=s+'</svg>';
+  }
+  function charts(){ drawBar(); drawMix(); drawPhases(); }
+
+  function setActive(key){
+    document.querySelectorAll('nav.rail a[data-key]').forEach(a=>{const on=a.dataset.key===key; a.classList.toggle('active',on); on?a.setAttribute('aria-current','page'):a.removeAttribute('aria-current');});
+  }
+
+  function renderBasics(){
+    const B=BASICS, c=a=>cite(a,'b');
+    const lens=l=>l?'<p class="lens"><b>Market lens</b>'+tv(l.t)+((l.src||[]).length?c(l.src):'')+'</p>':'';
+    const sec=(n,t,body)=>'<section><div class="sec-head"><span class="n">'+n+'</span><h2>'+t+'</h2></div>'+body+'</section>';
+    let h='<header><div class="eyebrow">Learn · Technical knowledge</div><h1>'+esc(B.title)+'<span class="dot">.</span></h1><p class="lede">'+esc(B.intro)+'</p><div class="meta"><span>Sources <b>WHO, CDC, HHS, EMA</b></span><span>Last updated <b>'+esc(B.lastUpdated)+'</b></span></div></header>';
+    h+=sec('01','How a vaccine works','<div class="flow">'+B.how.steps.map((s,i)=>'<div class="st"><div class="k">Step '+(i+1)+'</div><h3>'+esc(s.t)+'</h3><p>'+esc(s.d)+c(s.src)+'</p></div>').join('')+'</div>'+lens(B.how.lens));
+    h+=sec('02','Active vs passive immunity','<div class="tbl"><table><thead><tr><th>Type</th><th>Protection comes from</th><th>Speed</th><th>How long</th><th>Example</th></tr></thead><tbody>'+B.immunity.map(r=>'<tr><td><b>'+esc(r.type)+'</b>'+c(r.src)+'</td><td>'+esc(r.from)+'</td><td>'+esc(r.speed)+'</td><td>'+esc(r.dur)+'</td><td>'+esc(r.ex)+'</td></tr>').join('')+'</tbody></table></div>'+lens(B.immunityLens));
+    h+=sec('03','Vaccine technologies','<div class="fam">'+B.families.map(f=>'<div class="col" style="--c:var('+f.c+')"><h3>'+esc(f.name)+'</h3>'+f.items.map(i=>'<span>'+esc(i)+'</span>').join('')+'</div>').join('')+'</div><div class="tbl"><table><thead><tr><th>Technology</th><th>What is inside</th><th>Strengths</th><th>Limits</th><th>Example diseases</th></tr></thead><tbody>'+B.tech.map(r=>'<tr><td><b><i class="dotc" style="background:var('+r.f+')"></i>'+esc(r.n)+'</b>'+c(r.src)+'</td><td>'+esc(r.in)+'</td><td>'+esc(r.plus)+'</td><td>'+tv(r.minus)+'</td><td>'+esc(r.ex)+'</td></tr>').join('')+'</tbody></table></div>');
+    h+=sec('04','Adjuvants','<p class="note" style="margin:0 0 12px">'+esc(B.adjNote)+c(B.adjSrc)+'</p><div class="tbl"><table><thead><tr><th>Adjuvant</th><th>What it is</th><th>Used in</th></tr></thead><tbody>'+B.adjuvants.map(r=>'<tr><td><b>'+esc(r.a)+'</b></td><td>'+esc(r.what)+'</td><td>'+esc(r.in)+'</td></tr>').join('')+'</tbody></table></div>'+lens(B.adjLens));
+    h+=sec('05','How flu vaccines are made','<p class="note" style="margin:0 0 12px">'+esc(B.fluNote)+c([5])+'</p><div class="tbl"><table><thead><tr><th>Method</th><th>How it works</th><th>Since</th><th>Output</th></tr></thead><tbody>'+B.flu.map(r=>'<tr><td><b>'+esc(r.m)+'</b>'+c(B.fluSrc)+'</td><td>'+esc(r.how)+'</td><td>'+esc(r.since)+'</td><td>'+esc(r.out)+'</td></tr>').join('')+'</tbody></table></div>'+lens(B.fluLens));
+    h+=sec('06','From lab to market','<ol class="steps">'+B.dev.map(s=>'<li'+(s.ph?' class="ph"':'')+'><div class="k">'+esc(s.k)+'</div><p>'+esc(s.t)+'</p></li>').join('')+'</ol><p class="note" style="margin-top:4px">Sequence for the US, with the EU review step added'+c(B.devSrc)+'</p><div class="chart-wrap" id="b-sizes" style="margin-top:18px"></div>'+lens(B.devLens));
+    h+=sec('07','How vaccines are measured','<div class="tbl"><table><thead><tr><th>Term</th><th>Meaning</th><th>Where it comes from</th></tr></thead><tbody>'+B.measures.map(r=>'<tr><td><b>'+esc(r.t)+'</b>'+c(r.src)+'</td><td>'+esc(r.d)+'</td><td>'+esc(r.w)+'</td></tr>').join('')+'</tbody></table></div>');
+    h+=sec('08','Storage and cold chain','<ul class="takeaways">'+B.cold.map(p=>'<li><span>'+esc(p.t)+c(p.src)+'</span></li>').join('')+'</ul>'+lens(B.coldLens));
+    h+='<section class="sources"><div class="sec-head"><span class="n">09</span><h2>Sources</h2></div><ol>'+B.sources.map(s=>'<li id="b'+s.id+'" value="'+s.id+'"><a href="'+esc(s.u)+'" target="_blank" rel="noopener">'+esc(s.t)+'</a>, '+esc(s.o)+(s.secondary?'<span class="sec2">secondary</span>':'')+'. Accessed '+esc(B.lastUpdated)+'.</li>').join('')+'</ol><p class="note">Market lens notes are guidance for interns, not facts from the sources, unless a source number is shown.</p></section>';
+    $('view-basics').innerHTML=h;
+    // participant sizes chart, log scale
+    const W=600, L=210, R=70, rowH=30, H=B.sizes.length*rowH+34, x0=Math.log10(10), x1=Math.log10(100000);
+    const X=v=>L+(W-L-R)*(Math.log10(v)-x0)/(x1-x0);
+    let s='<div class="chart-title">Trial size by phase (participants, log scale)'+c([6,10])+'</div><svg viewBox="0 0 '+W+' '+H+'" width="100%" style="min-width:460px" role="img" aria-label="Typical clinical trial sizes by phase">';
+    [10,100,1000,10000,100000].forEach(t=>{const x=X(t); s+='<line x1="'+x+'" x2="'+x+'" y1="4" y2="'+(H-24)+'" style="stroke:var(--line)"/><text class="ax" x="'+x+'" y="'+(H-8)+'" text-anchor="middle">'+t.toLocaleString('en')+'</text>';});
+    B.sizes.forEach((r,i)=>{const y=8+i*rowH, a=X(r.lo), b=X(r.hi), real=r.lo===r.hi;
+      s+='<text class="ax" x="'+(L-10)+'" y="'+(y+13)+'" text-anchor="end">'+esc(r.k)+'</text>';
+      s+='<rect x="'+(real?a-5:a)+'" y="'+y+'" width="'+(real?10:Math.max(b-a,6))+'" height="18" rx="'+(real?9:3)+'" style="fill:var('+(real?'--lblue':'--violet')+')"/>';
+      s+='<text class="val" x="'+((real?a:b)+12)+'" y="'+(y+13)+'">'+(real?r.lo.toLocaleString('en'):r.lo.toLocaleString('en')+' to '+r.hi.toLocaleString('en'))+'</text>';});
+    $('b-sizes').innerHTML=s+'</svg>';
+    $('foot').textContent='Unofficial learning resource, not an official Sanofi website. Official health agency sources. Last updated '+B.lastUpdated+'.';
+  }
+
+  function render(key){
+    if(key==='basics'){
+      $('view-company').hidden=true; $('view-basics').hidden=false;
+      setActive('basics'); renderBasics(); acronyms(); return;
+    }
+    $('view-basics').hidden=true; $('view-company').hidden=false;
+    if(!ALL[key]) key='sanofi';
+    D=ALL[key];
+    setActive(key);
+    $('co-name').innerHTML=esc(D.company)+'<span class="dot">.</span>';
+    $('intro').textContent=D.intro;
+    $('meta').innerHTML='<span>HQ <b>'+esc(D.hq)+'</b></span><span>CEO <b>'+tv(D.ceo)+'</b></span><span>Data through <b>'+esc(D.dataThrough)+'</b></span><span>Last updated <b>'+esc(D.lastUpdated)+'</b></span>';
+    $('kpis').innerHTML=D.kpis.map(k=>'<div class="kpi"><div class="v">'+esc(k.v)+'</div><div class="l">'+esc(k.l)+cite(k.src)+'</div><div class="d '+k.dir+'">'+esc(k.d)+'</div></div>').join('');
+    $('chips').innerHTML=D.strategy.map(s=>'<span class="chip"><b>'+esc(s.k)+'</b>'+esc(s.t)+'</span>').join('')+'<span style="align-self:center">'+cite(D.strategySrc)+'</span>';
+    charts();
+    $('port').innerHTML=D.portfolio.map(r=>'<tr><td><b>'+esc(r.p)+'</b>'+cite(r.src)+'</td><td>'+esc(r.d)+'</td><td>'+tv(r.t)+'</td><td>'+esc(r.m)+'</td></tr>').join('');
+    $('pipe').innerHTML=D.pipeline.map(r=>'<tr><td><b>'+esc(r.n)+'</b>'+cite(r.src)+'</td><td>'+esc(r.d)+'</td><td>'+(r.ph==='TO VERIFY'?'<span class="tv">TO VERIFY</span>':'<span class="phase">'+esc(r.ph)+'</span>')+'</td><td>'+esc(r.st)+'</td></tr>').join('');
+    $('pipe-note').innerHTML=esc(D.pipelineNote)+cite(D.pipelineSrc);
+    $('tl').innerHTML=D.deals.map(d=>'<li><div class="date">'+esc(d.date)+'<br><span class="phase" style="margin-top:4px">'+esc(d.type)+'</span></div><div><div class="what">'+esc(d.what)+cite(d.src)+'</div><div class="sub">'+tv(d.sub)+'</div></div></li>').join('');
+    $('tend').innerHTML=D.tenders.map(r=>'<tr><td class="num">'+tv(r.date)+'</td><td>'+esc(r.buyer)+cite(r.src)+'</td><td>'+esc(r.country)+'</td><td>'+esc(r.product)+'</td><td class="num">'+esc(r.value)+'</td></tr>').join('');
+    $('tend-note').textContent=D.tenderNote;
+    $('mfg').innerHTML=D.plants.map(r=>'<tr><td><b>'+esc(r.site)+'</b>'+cite(r.src)+'</td><td>'+esc(r.country)+'</td><td>'+esc(r.tech)+'</td><td>'+tv(r.cap)+'</td></tr>').join('');
+    $('call-title').innerHTML='<b>'+esc(D.call.title)+'</b>';
+    $('pts').innerHTML=D.call.points.map(p=>'<li><span>'+esc(p.t)+cite(p.src)+'</span></li>').join('');
+    $('src').innerHTML=D.sources.map(s=>'<li id="s'+s.id+'" value="'+s.id+'"><a href="'+esc(s.u)+'" target="_blank" rel="noopener">'+esc(s.t)+'</a>, '+esc(s.o)+(s.secondary?'<span class="sec2">secondary</span>':'')+'. Accessed '+esc(D.lastUpdated)+'.</li>').join('');
+    $('foot').textContent='Unofficial learning resource, not an official Sanofi website. Public information only. No confidential Sanofi data. Last updated '+D.lastUpdated+'.';
+    acronyms();
+  }
+
+  const GL = JSON.parse(document.getElementById('glossary').textContent);
+  const reEsc = s => s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+  function acronyms(){
+    document.querySelectorAll('.view:not([hidden]) > header, .view:not([hidden]) section').forEach(sec=>{
+      sec.querySelectorAll('.acr').forEach(n=>n.remove());
+      const txt = sec.textContent;
+      const hits = GL.map(g=>{
+        const re = new RegExp(g.re || ('(^|[^A-Za-z0-9])'+reEsc(g.k)+'(?![A-Za-z0-9])'));
+        const i = txt.search(re);
+        return i<0 ? null : {g, i};
+      }).filter(Boolean).sort((a,b)=>a.i-b.i);
+      if(!hits.length) return;
+      const p = document.createElement('p');
+      p.className = 'acr';
+      p.innerHTML = '<b>Acronyms in this section</b>' + hits.map(h=>'<span><abbr>'+esc(h.g.k)+'</abbr>: '+esc(h.g.v)+'</span>').join('');
+      sec.appendChild(p);
+    });
+  }
+
+  document.querySelector('nav.rail').addEventListener('click',e=>{
+    const a=e.target.closest('a[data-key]'); if(!a) return;
+    e.preventDefault(); render(a.dataset.key);
+    try{ history.replaceState(null,'','#'+a.dataset.key); }catch(err){}
+    window.scrollTo({top:0});
+  });
+  render((location.hash||'').replace('#',''));
+  try{
+    const redraw=()=>{ if(!$('view-company').hidden && D) charts(); };
+    new MutationObserver(redraw).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+    matchMedia('(prefers-color-scheme: dark)').addEventListener('change',redraw);
+  }catch(e){}
+})();
+</script>

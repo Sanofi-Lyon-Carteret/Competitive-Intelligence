@@ -1,9 +1,6 @@
 # Vaccine Market Atlas
 
-Unofficial onboarding resource for Performance and Strategic Intelligence interns (Vaccines, Performance and Innovation team). Not an official Sanofi website.
-
-- Company profiles: Sanofi, Moderna (more coming)
-- Learn: Vaccine basics
+Internal resource for Sanofi's Competitive Intelligence work, part of Vaccine Performance and Innovation team  (Vaccines, Performance and Innovation team). Not an official Sanofi website.
 
 Public, official sources only. No confidential Sanofi data.
 

@@ -526,7 +526,7 @@ footer{margin-top:40px;font-size:13px;color:var(--muted);border-top:1px solid va
   </nav>
 
   <main id="top">
-   <p class="disclaimer" role="note"><b>Unofficial learning resource</b> created by an intern for onboarding. Not an official Sanofi website. Public information only.</p>
+   <p class="disclaimer" role="note"><b>Internal resource</b> for Sanofi's Competitive Intelligence work, part of Vaccine Performance and Innovation team (Vaccines, Performance and Innovation team). Not an official Sanofi website.</p>
    <div class="view" id="view-basics" hidden></div>
    <div class="view" id="view-company">
     <header id="head">
@@ -673,7 +673,7 @@ footer{margin-top:40px;font-size:13px;color:var(--muted);border-top:1px solid va
       s+='<rect x="'+(real?a-5:a)+'" y="'+y+'" width="'+(real?10:Math.max(b-a,6))+'" height="18" rx="'+(real?9:3)+'" style="fill:var('+(real?'--lblue':'--violet')+')"/>';
       s+='<text class="val" x="'+((real?a:b)+12)+'" y="'+(y+13)+'">'+(real?r.lo.toLocaleString('en'):r.lo.toLocaleString('en')+' to '+r.hi.toLocaleString('en'))+'</text>';});
     $('b-sizes').innerHTML=s+'</svg>';
-    $('foot').textContent='Unofficial learning resource, not an official Sanofi website. Official health agency sources. Last updated '+B.lastUpdated+'.';
+    $('foot').textContent='Not an official Sanofi website. Official health agency sources. Last updated '+B.lastUpdated+'.';
   }
 
   function render(key){
@@ -701,7 +701,7 @@ footer{margin-top:40px;font-size:13px;color:var(--muted);border-top:1px solid va
     $('call-title').innerHTML='<b>'+esc(D.call.title)+'</b>';
     $('pts').innerHTML=D.call.points.map(p=>'<li><span>'+esc(p.t)+cite(p.src)+'</span></li>').join('');
     $('src').innerHTML=D.sources.map(s=>'<li id="s'+s.id+'" value="'+s.id+'"><a href="'+esc(s.u)+'" target="_blank" rel="noopener">'+esc(s.t)+'</a>, '+esc(s.o)+(s.secondary?'<span class="sec2">secondary</span>':'')+'. Accessed '+esc(D.lastUpdated)+'.</li>').join('');
-    $('foot').textContent='Unofficial learning resource, not an official Sanofi website. Public information only. No confidential Sanofi data. Last updated '+D.lastUpdated+'.';
+    $('foot').textContent='Not an official Sanofi website. Public information only. No confidential Sanofi data. Last updated '+D.lastUpdated+'.';
     acronyms();
   }
 

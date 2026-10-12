@@ -1237,8 +1237,7 @@ footer{margin-top:40px;font-size:13px;color:var(--muted);border-top:1px solid va
 
     <section>
       <div class="sec-head"><span class="n">06</span><h2>Pipeline</h2></div>
-      <div class="chart-wrap" id="phasebar"></div>
-      <div class="tbl" style="margin-top:14px"><table><thead><tr><th>Candidate</th><th>Target</th><th>Phase</th><th>Status</th></tr></thead><tbody id="pipe"></tbody></table></div>
+      <div class="tbl"><table><thead><tr><th>Candidate</th><th>Target</th><th>Phase</th><th>Status</th></tr></thead><tbody id="pipe"></tbody></table></div>
       <p class="note" id="pipe-note"></p>
     </section>
 
@@ -1318,7 +1317,7 @@ footer{margin-top:40px;font-size:13px;color:var(--muted);border-top:1px solid va
       s+='<text x="'+(L-8)+'" y="'+(y+13)+'" text-anchor="end">'+p+'</text><rect x="'+L+'" y="'+y+'" width="'+w+'" height="16" rx="3" fill="'+(unk?css('--smoke'):css('--violet'))+'" opacity="'+(unk?.7:.4+i*.09)+'"/><text class="val" x="'+(L+w+6)+'" y="'+(y+13)+'">'+counts[i]+'</text>';});
     $('phasebar').innerHTML=s+'</svg>';
   }
-  function charts(){ drawBar(); drawMix(); drawPhases(); }
+  function charts(){ drawBar(); drawMix(); }
 
   function setActive(key){
     document.querySelectorAll('nav.rail a[data-key]').forEach(a=>{const on=a.dataset.key===key; a.classList.toggle('active',on); on?a.setAttribute('aria-current','page'):a.removeAttribute('aria-current');});

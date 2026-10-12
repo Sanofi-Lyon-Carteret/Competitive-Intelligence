@@ -104,6 +104,31 @@ sup a{font-family:var(--f-data);font-size:10.5px;text-decoration:none;margin-lef
 .steps .k{font-family:var(--f-data);font-size:12px;color:var(--violet);font-weight:500}
 .steps p{margin:4px 0 0;font-size:13.5px;color:var(--muted)}
 svg .ax{fill:var(--muted)}
+.cards5{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
+.c5{border:1px solid var(--line);border-radius:10px;padding:16px;display:flex;flex-direction:column;gap:8px}
+.c5 .ic{width:44px;height:44px;border-radius:10px;background:var(--violet-soft);color:var(--violet);display:grid;place-items:center}
+.c5 h3{font-family:var(--f-display);font-size:16px;margin:0}
+.c5 p{margin:0;font-size:14.5px}
+.c5 .real{font-size:13px;color:var(--muted)}
+.c5 a.go{font-size:13.5px;font-weight:600;text-decoration:none;margin-top:auto}
+.split .row{display:grid;grid-template-columns:120px minmax(0,1fr);gap:12px;align-items:center;margin:8px 0}
+.split .bar{display:flex;height:30px;border-radius:5px;overflow:hidden}
+.split .bar span{display:flex;align-items:center;padding-left:8px;font-family:var(--f-data);font-size:12px;color:#fff;white-space:nowrap;overflow:hidden}
+.split .k{font-size:14px;font-weight:600}
+.glsearch{width:100%;max-width:420px;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--fg);font:inherit}
+.gl{display:grid;gap:0;margin:16px 0 0;padding:0}
+.gl div{display:grid;grid-template-columns:200px minmax(0,1fr);gap:16px;padding:9px 0;border-bottom:1px solid var(--line)}
+.gl dt{font-weight:600;margin:0}
+.gl dd{margin:0;color:var(--fg)}
+.gl .kind{font-family:var(--f-data);font-size:11px;color:var(--muted);display:block;font-weight:400}
+.news{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.news li{border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.news .top{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;font-size:13px;color:var(--muted)}
+.news h3{font-family:var(--f-display);font-size:16px;margin:6px 0}
+.news p{margin:4px 0;font-size:14.5px}
+.news .why{color:var(--muted)}
+.empty{background:var(--surface);border-radius:10px;padding:14px 16px;font-weight:600}
+@media (max-width:820px){.gl div{grid-template-columns:minmax(0,1fr);gap:2px}.split .row{grid-template-columns:minmax(0,1fr);gap:4px}}
 .disclaimer{background:var(--warn-bg);color:var(--warn-fg);font-size:13px;padding:8px 12px;border-radius:6px;margin:0 0 20px;max-width:none}
 footer{margin-top:40px;font-size:13px;color:var(--muted);border-top:1px solid var(--line);padding-top:14px}
 @media (max-width:820px){
@@ -240,7 +265,7 @@ footer{margin-top:40px;font-size:13px;color:var(--muted);border-top:1px solid va
 "moderna": {
   "company": "Moderna",
   "hq": "Cambridge, Massachusetts, US",
-  "ceo": "TO VERIFY",
+  "ceo": "Stéphane Bancel",
   "lastUpdated": "9 October 2026",
   "dataThrough": "Q2 2026 results",
   "intro": "mRNA specialist. All marketed products are respiratory vaccines: COVID-19, RSV and, since August 2026 in the US, influenza. Reports in US dollars.",
@@ -286,7 +311,7 @@ footer{margin-top:40px;font-size:13px;color:var(--muted);border-top:1px solid va
     {"n":"mRNA-1010 (mFLUSIVA)","d":"Influenza, outside US","ph":"Filed","st":"Review in EU, Canada, Australia","src":[1,5]},
     {"n":"mRNA-1403","d":"Norovirus","ph":"Phase 3","st":"Interim did not meet early success; trial continues","src":[1]},
     {"n":"mRNA-1018","d":"Pandemic influenza","ph":"Phase 3","st":"Supported by CEPI","src":[2]},
-    {"n":"Intismeran (mRNA-4157)","d":"Oncology: melanoma, lung (with Merck)","ph":"Phase 3","st":"Melanoma data possible in 2026","src":[1,2]},
+    {"n":"Intismeran (mRNA-4157)","d":"Oncology: melanoma, lung (with Merck)","ph":"Phase 3","st":"Melanoma Phase 3 (INTerpath-001) met its main goal, Aug 2026","src":[1,2,7]},
     {"n":"mRNA-4359","d":"Oncology","ph":"Phase 1/2","st":"Phase 2 readout possible in 2026","src":[2]},
     {"n":"mRNA-3927","d":"Rare disease: propionic acidemia","ph":"Registrational","st":"Fully enrolled; data possible in 2026","src":[1]},
     {"n":"mRNA-3705","d":"Rare disease: methylmalonic acidemia","ph":"Planned","st":"Pivotal trial decision after PA data","src":[1]}
@@ -330,7 +355,353 @@ footer{margin-top:40px;font-size:13px;color:var(--muted);border-top:1px solid va
     {"id":2,"t":"Q1 2026 financial results press release (Form 8-K)","o":"Moderna / SEC","u":"https://www.sec.gov/Archives/edgar/data/0001682852/000168285226000057/exhibit9912026q1pressrelea.htm"},
     {"id":3,"t":"Q4 and FY 2025 financial results press release (Form 8-K)","o":"Moderna / SEC","u":"https://www.sec.gov/Archives/edgar/data/1682852/000168285226000015/exhibit9912025q4pressrelea.htm"},
     {"id":4,"t":"Q3 2025 financial results press release (Form 8-K)","o":"Moderna / SEC","u":"https://www.sec.gov/Archives/edgar/data/1682852/000168285225000073/exhibit9912025q3pressrelea.htm"},
-    {"id":5,"t":"Moderna receives US FDA approval for influenza vaccine mFLUSIVA (republished press release)","o":"Moderna, via BioSpace","u":"https://www.biospace.com/press-releases/moderna-receives-u-s-fda-approval-for-influenza-vaccine-mflusiva","secondary":true}
+    {"id":5,"t":"Moderna receives US FDA approval for influenza vaccine mFLUSIVA (republished press release)","o":"Moderna, via BioSpace","u":"https://www.biospace.com/press-releases/moderna-receives-u-s-fda-approval-for-influenza-vaccine-mflusiva","secondary":true},
+    {"id":6,"t":"Moderna stock falls 7% after adding Chief Operating Officer role (names CEO Stéphane Bancel)","o":"RTTNews","u":"https://www.rttnews.com/story.aspx?Id=3695426","secondary":true},
+    {"id":7,"t":"Merck, Moderna's personalized cancer vaccine slows recurrence in Phase 3","o":"Fierce Biotech","u":"https://www.fiercebiotech.com/biotech/merck-and-modernas-personalized-cancer-vaccine-slows-recurrence-ph-3-trial","secondary":true}
+  ]
+},
+"gsk": {
+  "company": "GSK",
+  "hq": "London, United Kingdom",
+  "ceo": "Luke Miels",
+  "lastUpdated": "12 October 2026",
+  "dataThrough": "Q2 2026 results",
+  "intro": "Largest vaccine competitor by sales. Shingles (Shingrix) is the biggest product, followed by pediatric vaccines, meningitis and RSV (Arexvy). Reports in pounds sterling.",
+  "kpis": [
+    {"v":"£32.7bn","l":"Group sales, FY 2025","d":"+7% at CER","dir":"pos","src":[3]},
+    {"v":"£9.16bn","l":"Vaccines sales, FY 2025","d":"+2% at CER","dir":"pos","src":[5]},
+    {"v":"28%","l":"Vaccines share of sales, FY 2025","d":"Calculated: 9,157 / 32,700","dir":"","src":[3,5]},
+    {"v":"£2.28bn","l":"Vaccines sales, Q2 2026","d":"+8% at CER","dir":"pos","src":[1]}
+  ],
+  "strategy": [
+    {"k":"Defend","t":"Shingrix leadership; US uptake now 45% of eligible adults"},
+    {"k":"Grow","t":"meningitis: Bexsero, Menveo, new 5-in-1 Penmenvy"},
+    {"k":"Expand","t":"Arexvy to younger at-risk and immunocompromised adults"},
+    {"k":"Build","t":"mRNA seasonal flu; investment raised in Q2 2026"},
+    {"k":"Invest","t":"new freeze-dried vaccine unit in Wavre, Belgium"}
+  ],
+  "strategySrc": [1,5,6],
+  "rev": {
+    "title":"Quarterly vaccines sales (£m)", "cur":"£", "max":3000, "ticks":[0,1000,2000,3000],
+    "quarters": ["Q1 25","Q2 25","Q3 25","Q4 25","Q1 26","Q2 26"],
+    "values": [2095,2091,2678,2293,2149,2284],
+    "src": [1,2,4,5],
+    "note": "Q2 2025 calculated: 9-month 2025 (£6,864m) minus Q1 (£2,095m) and Q3 (£2,678m). Q1 2026 calculated: H1 2026 (£4,433m) minus Q2 (£2,284m). Q3 peaks come from flu and autumn vaccination."
+  },
+  "mix": {
+    "title":"FY 2025 vaccines sales by product group (£m)",
+    "items":[
+      {"k":"Shingrix (shingles)","v":3558,"c":"--violet"},
+      {"k":"Established vaccines","v":3120,"c":"--victoria"},
+      {"k":"Meningitis","v":1583,"c":"--blue"},
+      {"k":"Arexvy (RSV)","v":593,"c":"--lblue"},
+      {"k":"Other (calculated)","v":303,"c":"--smoke"}
+    ],
+    "src":[5],
+    "note":"Other is the difference between total vaccines (£9,157m) and the four named groups."
+  },
+  "portfolio": [
+    {"p":"Shingrix","d":"Shingles, adults","t":"Recombinant, adjuvanted (AS01B)","m":"US largest; Europe growing","src":[1,7]},
+    {"p":"Arexvy","d":"RSV, older and at-risk adults","t":"TO VERIFY","m":"US, Europe, Japan; Australia tender","src":[1,5]},
+    {"p":"Bexsero","d":"Meningococcal B","t":"TO VERIFY","m":"International and Europe demand","src":[1]},
+    {"p":"Menveo","d":"Meningococcal A, C, W, Y","t":"Conjugate","m":"Global","src":[1]},
+    {"p":"Penmenvy","d":"Meningococcal A, B, C, W, Y","t":"TO VERIFY","m":"US (FDA approved 2025)","src":[1,3]},
+    {"p":"Boostrix","d":"Tetanus, diphtheria, pertussis booster","t":"Toxoid and subunit","m":"Global","src":[1]},
+    {"p":"Infanrix, Pediarix","d":"Pediatric combination","t":"Toxoid and subunit","m":"US hit by prior CDC stockpile timing","src":[1]},
+    {"p":"Rotarix","d":"Rotavirus","t":"Live-attenuated","m":"Global","src":[1]}
+  ],
+  "pipeline": [
+    {"n":"Arexvy, immunocompromised 18+","d":"RSV","ph":"Filed","st":"US decision expected H2 2026; Japan approved Q2 2026","src":[1,5]},
+    {"n":"Arexvy, adults 60+ in China","d":"RSV","ph":"Filed","st":"Positive China Phase 3; decision expected H1 2027","src":[1,5]},
+    {"n":"Bexsero MenB booster 10+","d":"Meningococcal B","ph":"Filed","st":"EU filing accepted Q2 2026","src":[1]},
+    {"n":"Bexsero, infants in the US","d":"Meningococcal B","ph":"Planned","st":"US filing expected H2 2026","src":[1]},
+    {"n":"mRNA seasonal flu","d":"Influenza","ph":"TO VERIFY","st":"Trial investment raised Q2 2026","src":[1]},
+    {"n":"M72/AS01E (licensed to Gates MRI)","d":"Tuberculosis","ph":"Phase 3","st":"Serum Institute of India to manufacture","src":[1]}
+  ],
+  "pipelineNote": "Selected vaccine programs named in GSK results releases. Full list in the GSK pipeline appendix.",
+  "pipelineSrc": [1,5],
+  "deals": [
+    {"date":"Q2 2026","what":"Serum Institute of India manufacturing agreement","sub":"Will produce the M72/AS01E tuberculosis vaccine candidate.","type":"Partnership","src":[1]},
+    {"date":"H1 2026","what":"Rockville site sold to Samsung Biologics","sub":"Profit booked in H1 2026.","type":"Divestment","src":[1]},
+    {"date":"Sep 2023","what":"Wavre investment of more than €250m","sub":"Freeze-dried unit for Shingrix and Arexvy, operational 2027.","type":"Investment","src":[6]}
+  ],
+  "tenders": [
+    {"date":"Q2 2026","buyer":"Australia (national tender)","country":"Australia","product":"Arexvy","value":"Not public","src":[1]},
+    {"date":"2025","buyer":"US CDC stockpile","country":"United States","product":"Infanrix, Pediarix","value":"Not public","src":[1]}
+  ],
+  "tenderNote": "Add public tender awards from TED (EU), UNICEF and national portals here.",
+  "plants": [
+    {"site":"Wavre","country":"Belgium","tech":"Freeze-dried vaccines (Shingrix, Arexvy, Mosquirix)","cap":"Tens of millions of doses a year; operational 2027","src":[6]},
+    {"site":"Rockville","country":"United States","tech":"Sold to Samsung Biologics","cap":"No longer GSK","src":[1]},
+    {"site":"Other vaccine sites","country":"TO VERIFY","tech":"TO VERIFY","cap":"TO VERIFY","src":[]}
+  ],
+  "call": {
+    "title":"Q2 2026 results",
+    "points":[
+      {"t":"Vaccines £2,284m, +8% at CER; about 3 points from prior period rebate adjustments","src":[1]},
+      {"t":"Shingrix £888m, +3%: Europe up, US stable","src":[1]},
+      {"t":"Arexvy £192m, more than doubled: Australian tender and US rebate adjustments","src":[1]},
+      {"t":"Meningitis £462m, +21%: outbreak-related demand","src":[1]},
+      {"t":"FY 2026 vaccines guidance raised: stable to low single-digit growth","src":[1]}
+    ]
+  },
+  "sources": [
+    {"id":1,"t":"Q2 2026 results announcement (Form 6-K)","o":"GSK / SEC","u":"https://www.sec.gov/Archives/edgar/data/0001131399/000165495426006949/a1493o.htm"},
+    {"id":2,"t":"Q1 2025 results announcement","o":"GSK","u":"https://www.gsk.com/media/11962/q1-2025-results-announcement.pdf"},
+    {"id":3,"t":"GSK delivers strong 2025 performance and re-affirms long-term outlooks","o":"GSK","u":"https://www.gsk.com/en-gb/media/press-releases/gsk-delivers-strong-2025-performance-and-re-affirms-long-term-outlooks/"},
+    {"id":4,"t":"Q3 2025 results announcement","o":"GSK","u":"https://www.gsk.com/media/snycbnpn/q3-2025-results-announcement.pdf"},
+    {"id":5,"t":"FY 2025 final results (RNS)","o":"GSK, via Investegate","u":"https://www.investegate.co.uk/announcement/rns/gsk--gsk/final-results/9406766"},
+    {"id":6,"t":"GSK invests more than €250M in vaccine manufacturing","o":"Fierce Pharma","u":"https://www.fiercepharma.com/manufacturing/gsk-invests-eu250-million-vaccine-manufacturing-shingrix-surges-rsv-launch-kicks","secondary":true},
+    {"id":7,"t":"Adjuvants and Vaccines","o":"CDC","u":"https://www.cdc.gov/vaccine-safety/about/adjuvants.html"}
+  ]
+},
+"msd": {
+  "company": "MSD (Merck & Co.)",
+  "hq": "Rahway, New Jersey, United States",
+  "ceo": "Robert M. Davis",
+  "lastUpdated": "12 October 2026",
+  "dataThrough": "Q2 2026 results",
+  "intro": "Known as Merck in the US and Canada, MSD elsewhere. Vaccines led by Gardasil (HPV), whose sales fell sharply after demand in China collapsed in 2025. Growing in adult pneumococcal (Capvaxive) and infant RSV (Enflonsia). Reports in US dollars.",
+  "kpis": [
+    {"v":"$65.0bn","l":"Worldwide sales, FY 2025","d":"Q2 2026: $16.6bn, +5%","dir":"pos","src":[2,1]},
+    {"v":"$9.9bn","l":"Sales of main vaccines, FY 2025","d":"Calculated: sum of 5 product lines below","dir":"","src":[2]},
+    {"v":"15%","l":"Main vaccines share of sales, FY 2025","d":"Calculated: 9,941 / 65,011","dir":"","src":[2]},
+    {"v":"$5.23bn","l":"Gardasil sales, FY 2025","d":"-39% vs FY 2024 ($8.58bn)","dir":"neg","src":[2]}
+  ],
+  "strategy": [
+    {"k":"Recover","t":"Gardasil after China demand fell to zero in 2025"},
+    {"k":"Grow","t":"adult pneumococcal with Capvaxive; now also children 2 to 17 at risk (US)"},
+    {"k":"Launch","t":"Enflonsia infant RSV antibody: EU, Japan, China approvals"},
+    {"k":"Prevent flu","t":"MK-1406 long-acting antiviral (Phase 3), from Cidara"},
+    {"k":"Invest","t":"more than $70bn committed to US production and R&D"}
+  ],
+  "strategySrc": [1,2,3],
+  "rev": {
+    "title":"Quarterly Gardasil sales ($m)", "cur":"$", "max":2500, "ticks":[0,500,1000,1500,2000,2500],
+    "quarters": ["Q3 24","Q4 24","Q1 25","Q2 25","Q3 25","Q4 25","Q1 26","Q2 26"],
+    "values": [2306,1550,1327,1126,1749,1031,1069,1169],
+    "src": [1,2,3,4],
+    "note": "Q2 2025 calculated: September year-to-date 2025 ($4,202m) minus Q1 ($1,327m) and Q3 ($1,749m). Gardasil sales in China fell from $1,312m in Q2 2024 to $0 in Q2 and Q3 2025."
+  },
+  "mix": {
+    "title":"FY 2025 sales of main vaccines ($m)",
+    "items":[
+      {"k":"Gardasil (HPV)","v":5233,"c":"--violet"},
+      {"k":"ProQuad, M-M-R II, Varivax","v":2451,"c":"--victoria"},
+      {"k":"Vaxneuvance","v":825,"c":"--blue"},
+      {"k":"Capvaxive","v":759,"c":"--lblue"},
+      {"k":"RotaTeq","v":673,"c":"--smoke"}
+    ],
+    "src":[2],
+    "note":"Merck does not report a vaccines total; these are the vaccine lines in its sales table."
+  },
+  "portfolio": [
+    {"p":"Gardasil, Gardasil 9","d":"HPV","t":"Recombinant","m":"Asia Pacific, Europe, US; China near zero","src":[1,3]},
+    {"p":"ProQuad, M-M-R II, Varivax","d":"Measles, mumps, rubella, chickenpox","t":"Live-attenuated","m":"Mainly US","src":[1]},
+    {"p":"Capvaxive","d":"Pneumococcal (21 types), adults; children 2 to 17 at risk","t":"Conjugate","m":"US; international launches","src":[1,3]},
+    {"p":"Vaxneuvance","d":"Pneumococcal","t":"Conjugate","m":"US public sector large buyer","src":[1]},
+    {"p":"RotaTeq","d":"Rotavirus","t":"Live-attenuated","m":"Global","src":[3]},
+    {"p":"Enflonsia (clesrovimab)","d":"RSV, infants","t":"Monoclonal antibody","m":"EU, Japan, China; US: TO VERIFY","src":[1,3]}
+  ],
+  "pipeline": [
+    {"n":"Capvaxive, children 2 to 17 at risk","d":"Pneumococcal","ph":"Approved","st":"US approved Q2 2026; EU positive CHMP opinion","src":[1,3]},
+    {"n":"Enflonsia, second RSV season","d":"RSV","ph":"Phase 3","st":"SMART trial positive","src":[3]},
+    {"n":"MK-1406 (from Cidara)","d":"Flu prevention antiviral","ph":"Phase 3","st":"ANCHOR trial","src":[2]},
+    {"n":"Intismeran (with Moderna)","d":"Oncology: melanoma","ph":"Phase 3","st":"INTerpath-001 met its main goal, Aug 2026","src":[5]}
+  ],
+  "pipelineNote": "Selected programs from Merck results releases. MK-1406 and intismeran are not vaccines in the classic sense but compete in prevention.",
+  "pipelineSrc": [1,2,3],
+  "deals": [
+    {"date":"TO VERIFY","what":"Cidara Therapeutics acquired","sub":"Adds MK-1406 flu prevention antiviral; $9.0bn one-time R&D charge in 2026 outlook.","type":"Acquisition","src":[1,2]},
+    {"date":"Ongoing","what":"Moderna collaboration","sub":"Co-development of intismeran personalized cancer vaccine.","type":"Partnership","src":[5]},
+    {"date":"Q4 2025","what":"US tariff understanding","sub":"Section 232 tariffs delayed three years to allow reshoring of manufacturing.","type":"Policy","src":[2]}
+  ],
+  "tenders": [
+    {"date":"Q1 2026","buyer":"US public sector","country":"United States","product":"Gardasil (lower purchases)","value":"Not public","src":[3]},
+    {"date":"Q2 2025","buyer":"US public sector","country":"United States","product":"Vaxneuvance (high purchases, prior period)","value":"Not public","src":[1]}
+  ],
+  "tenderNote": "Merck explains swings by US public-sector purchasing patterns. Check UNICEF, PAHO and TED award notices for Gardasil and pneumococcal tenders.",
+  "plants": [
+    {"site":"US manufacturing","country":"United States","tech":"Multiple","cap":"More than $70bn committed to US capital and R&D","src":[2]},
+    {"site":"Vaccine sites","country":"TO VERIFY","tech":"TO VERIFY","cap":"TO VERIFY","src":[]}
+  ],
+  "call": {
+    "title":"Q2 2026 results",
+    "points":[
+      {"t":"Gardasil $1,169m, +4%: higher demand in Asia Pacific and Europe","src":[1]},
+      {"t":"Capvaxive $184m, +42%: launches in international markets","src":[1]},
+      {"t":"Vaxneuvance $148m, -35%: high US public-sector buying last year","src":[1]},
+      {"t":"ProQuad, M-M-R II, Varivax $592m, -3%: lower US demand","src":[1]},
+      {"t":"2026 sales guidance raised to $66.3bn to $67.3bn","src":[1]}
+    ]
+  },
+  "sources": [
+    {"id":1,"t":"Q2 2026 financial results press release (republished)","o":"Merck, via 1stOncology","u":"https://www.1stoncology.com/blog/?p=112627","secondary":true},
+    {"id":2,"t":"Q4 and full year 2025 earnings announcement","o":"Merck","u":"https://www.merck.com/wp-content/uploads/sites/124/2026/02/4Q25-Merck-Earnings-Announcement.pdf"},
+    {"id":3,"t":"Q1 2026 earnings announcement","o":"Merck","u":"https://www.merck.com/wp-content/uploads/sites/124/2026/04/1Q26-Merck-Earnings-Announcement.pdf"},
+    {"id":4,"t":"Q3 2025 product sales tables (Form 8-K exhibit)","o":"Merck / SEC","u":"https://www.sec.gov/Archives/edgar/data/310158/000110465925103974/tm2529620d1_ex99-2.htm"},
+    {"id":5,"t":"Merck, Moderna's personalized cancer vaccine slows recurrence in Phase 3","o":"Fierce Biotech","u":"https://www.fiercebiotech.com/biotech/merck-and-modernas-personalized-cancer-vaccine-slows-recurrence-ph-3-trial","secondary":true}
+  ]
+},
+"pfizer": {
+  "company": "Pfizer",
+  "hq": "New York, United States",
+  "ceo": "Albert Bourla",
+  "lastUpdated": "12 October 2026",
+  "dataThrough": "Q2 2026 results (4 August 2026)",
+  "intro": "Leader in pneumococcal vaccines (Prevnar family) and a COVID-19 vaccine maker with BioNTech (Comirnaty). Also sells the RSV vaccine Abrysvo for older adults and pregnant women. Reports in US dollars.",
+  "kpis": [
+    {"v":"$62.6bn","l":"Total revenues, FY 2025","d":"Q2 2026: $15.0bn, +3%","dir":"pos","src":[3,1]},
+    {"v":"$11.9bn","l":"Sales of 3 main vaccines, FY 2025","d":"Calculated: Prevnar + Comirnaty + Abrysvo","dir":"","src":[3]},
+    {"v":"19%","l":"Vaccines share of revenues, FY 2025","d":"Calculated: 11,894 / 62,579","dir":"","src":[3]},
+    {"v":"$1.81bn","l":"Sales of 3 main vaccines, Q2 2026","d":"-5% vs Q2 2025 (calculated)","dir":"neg","src":[2]}
+  ],
+  "strategy": [
+    {"k":"Defend","t":"Prevnar franchise; US sales down, international up"},
+    {"k":"Next-gen","t":"25-valent pneumococcal vaccine, pediatric Phase 3 since May 2026"},
+    {"k":"Grow","t":"Abrysvo outside the US; international sales more than tripled in Q2 2026"},
+    {"k":"Adapt","t":"COVID-19 vaccine updated to XFG strain for 2026 to 2027"},
+    {"k":"New disease","t":"Lyme disease vaccine VLA15 with Valneva"}
+  ],
+  "strategySrc": [1,2,4],
+  "rev": {
+    "title":"Quarterly sales of Prevnar, Abrysvo and Comirnaty ($m)", "cur":"$", "max":6000, "ticks":[0,2000,4000,6000],
+    "quarters": ["Q4 24","Q1 25","Q2 25","Q3 25","Q4 25","Q1 26","Q2 26"],
+    "values": [5139,2355,1907,3172,4460,2102,1806],
+    "src": [2,3],
+    "note": "Sum of the three products. Q1 2025, Q3 2025 and Q1 2026 calculated from half-year and full-year totals. Q4 peaks come from COVID-19 vaccine season."
+  },
+  "mix": {
+    "title":"FY 2025 vaccines sales by product ($m)",
+    "items":[
+      {"k":"Prevnar family","v":6494,"c":"--violet"},
+      {"k":"Comirnaty (COVID-19)","v":4367,"c":"--blue"},
+      {"k":"Abrysvo (RSV)","v":1033,"c":"--lblue"}
+    ],
+    "src":[3]
+  },
+  "portfolio": [
+    {"p":"Prevnar family (incl. Prevnar 20)","d":"Pneumococcal, infants and adults","t":"Conjugate","m":"US about 60% of H1 2026 sales","src":[2]},
+    {"p":"Comirnaty (with BioNTech)","d":"COVID-19","t":"mRNA","m":"EU XFG formula authorised July 2026","src":[1,2]},
+    {"p":"Abrysvo","d":"RSV, older adults and maternal","t":"TO VERIFY","m":"International now larger than US","src":[2]}
+  ],
+  "pipeline": [
+    {"n":"PF-07872412 (25-valent)","d":"Pneumococcal, infants","ph":"Phase 3","st":"Pivotal pediatric program started May 2026","src":[1]},
+    {"n":"35-valent adult candidate","d":"Pneumococcal, adults","ph":"Planned","st":"Expected in clinic by end 2026","src":[1]},
+    {"n":"VLA15 (with Valneva)","d":"Lyme disease","ph":"Phase 3","st":"VALOR trial; filings planned 2026 if data positive","src":[4]},
+    {"n":"Comirnaty 2026 to 2027 formula","d":"COVID-19 (XFG)","ph":"Approved","st":"EU authorised July 2026","src":[1]}
+  ],
+  "pipelineNote": "Selected vaccine programs from Pfizer releases.",
+  "pipelineSrc": [1],
+  "deals": [
+    {"date":"Nov 2025","what":"Metsera acquired (obesity)","sub":"About $7.0bn enterprise value plus milestone payments. Context: not vaccines, shows where Pfizer invests.","type":"Acquisition","src":[3]},
+    {"date":"Apr 2020","what":"Valneva Lyme disease deal","sub":"Co-development deal for VLA15 worth up to $308m.","type":"Licensing","src":[4]}
+  ],
+  "tenders": [
+    {"date":"TO VERIFY","buyer":"No public tender data captured yet","country":"","product":"Prevnar, Abrysvo","value":"","src":[]}
+  ],
+  "tenderNote": "Check UNICEF, PAHO and TED award notices for pneumococcal and RSV tenders.",
+  "plants": [
+    {"site":"Puurs","country":"Belgium","tech":"Vaccines incl. Comirnaty","cap":"€1.2bn investment over 3 years announced Dec 2022","src":[5]},
+    {"site":"Other vaccine sites","country":"TO VERIFY","tech":"TO VERIFY","cap":"TO VERIFY","src":[]}
+  ],
+  "call": {
+    "title":"Q2 2026 results, 4 August 2026",
+    "points":[
+      {"t":"Prevnar family $1,337m, -3%: US down, international up","src":[2]},
+      {"t":"Abrysvo $208m, +45%: international growth","src":[2]},
+      {"t":"Comirnaty $261m: narrower US vaccination recommendation","src":[1,2]},
+      {"t":"COVID-19 product outlook cut to about $4bn from about $5bn","src":[1]},
+      {"t":"2026 revenue guidance $60.5bn to $62.5bn","src":[1]}
+    ]
+  },
+  "sources": [
+    {"id":1,"t":"Pfizer reports second-quarter results and raises midpoint of 2026 revenue guidance (republished)","o":"Pfizer, via BioSpace","u":"https://www.biospace.com/press-releases/pfizer-reports-second-quarter-results-and-raises-midpoint-of-2026-revenue-guidance","secondary":true},
+    {"id":2,"t":"Q2 2026 earnings release with product tables (copy)","o":"Pfizer, via Pharmabiz","u":"https://www.pharmabiz.net/wp-content/uploads/2026/08/PfizerQ2-2026-PFE-Earnings-Release-FINAL.pdf","secondary":true},
+    {"id":3,"t":"Q4 2025 earnings release","o":"Pfizer","u":"https://s206.q4cdn.com/795948973/files/doc_financials/2025/q4/Q4-2025-PFE-Earnings-Release-FINAL2.pdf"},
+    {"id":4,"t":"Pfizer, Valneva push Lyme disease vaccine submission to 2026","o":"Pharma Manufacturing","u":"https://www.pharmamanufacturing.com/development/drug-approvals/news/33004540/pfizer-valneva-push-lyme-disease-vax-submission-to-2026","secondary":true},
+    {"id":5,"t":"Record €1.2 billion investment for Pfizer in Puurs","o":"La Libre Belgique","u":"https://www.lalibre.be/economie/entreprises-startup/2022/12/02/investissement-record-de-12-milliard-deuros-pour-pfizer-a-puurs-OZLWAQH3FRAU7K25KHNJIN6SSU/","secondary":true}
+  ]
+},
+"astrazeneca": {
+  "company": "AstraZeneca",
+  "hq": "Cambridge, United Kingdom",
+  "ceo": "Pascal Soriot",
+  "lastUpdated": "12 October 2026",
+  "dataThrough": "H1 2026 results (27 July 2026)",
+  "intro": "Small vaccine player but a key Sanofi partner: AstraZeneca manufactures Beyfortus and supplies it to Sanofi. Also sells FluMist, a nasal flu vaccine, and Synagis. Reports in US dollars.",
+  "kpis": [
+    {"v":"$58.7bn","l":"Total revenue, FY 2025","d":"+8% at CER","dir":"pos","src":[2]},
+    {"v":"$1.27bn","l":"Vaccines and Immune Therapies, FY 2025","d":"-13% (actual)","dir":"neg","src":[2]},
+    {"v":"2%","l":"Share of total revenue, FY 2025","d":"Calculated: 1,268 / 58,739","dir":"","src":[2]},
+    {"v":"$131m","l":"Infectious Disease revenue, Q2 2026","d":"-30% at CER","dir":"neg","src":[1]}
+  ],
+  "strategy": [
+    {"k":"Partner","t":"makes Beyfortus for Sanofi; earns product sales and a profit share"},
+    {"k":"Innovate","t":"FluMist Home: nasal flu vaccine given at home (US)"},
+    {"k":"Replace","t":"Synagis declining as Beyfortus takes over"},
+    {"k":"Ambition","t":"$80bn total revenue by 2030"},
+    {"k":"Invest","t":"$15bn in China through 2030"}
+  ],
+  "strategySrc": [1,2,5,6],
+  "rev": {
+    "title":"Quarterly vaccines and infection revenue ($m)", "cur":"$", "max":500, "ticks":[0,100,200,300,400,500],
+    "quarters": ["Q1 25","Q2 25","Q3 25","Q4 25","Q1 26","Q2 26"],
+    "values": [226,185,416,442,181,131],
+    "src": [1,2,3,4],
+    "note": "2025: Vaccines and Immune Therapies. 2026: Infectious Disease, so years may not be fully comparable. Q1 2025 calculated: H1 ($411m) minus Q2 ($185m). Q1 2026 calculated: H1 ($312m) minus Q2 ($131m)."
+  },
+  "mix": {
+    "title":"FY 2025 Vaccines and Immune Therapies by product ($m)",
+    "items":[
+      {"k":"Beyfortus (RSV)","v":703,"c":"--violet"},
+      {"k":"Synagis (RSV)","v":292,"c":"--victoria"},
+      {"k":"FluMist (flu)","v":272,"c":"--lblue"}
+    ],
+    "src":[2]
+  },
+  "portfolio": [
+    {"p":"Beyfortus (nirsevimab)","d":"RSV, infants","t":"Monoclonal antibody","m":"Sold by Sanofi; AstraZeneca manufactures","src":[1,2]},
+    {"p":"FluMist","d":"Influenza, ages 2 to 49","t":"Live-attenuated, nasal spray","m":"US; home delivery in 34 states","src":[2,6]},
+    {"p":"Synagis (palivizumab)","d":"RSV, high-risk infants","t":"Monoclonal antibody","m":"Declining","src":[1,2]}
+  ],
+  "pipeline": [
+    {"n":"FluMist self or caregiver use","d":"Influenza","ph":"Approved","st":"FluMist Home launched for 2025 to 2026 season","src":[6]},
+    {"n":"Other vaccine and antibody programs","d":"See AstraZeneca clinical trials appendix","ph":"TO VERIFY","st":"Not detailed in results releases","src":[]}
+  ],
+  "pipelineNote": "AstraZeneca results releases give little vaccine pipeline detail.",
+  "pipelineSrc": [1],
+  "deals": [
+    {"date":"Ongoing","what":"Beyfortus alliance with Sanofi","sub":"AstraZeneca books product sales to Sanofi plus a share of profits and royalties outside the US.","type":"Partnership","src":[1,2]},
+    {"date":"Aug 2025","what":"FluMist Home launch","sub":"Order online, delivered to the home after provider review.","type":"Launch","src":[6]},
+    {"date":"FY 2025","what":"$15bn China investment plan","sub":"Manufacturing and R&D through 2030.","type":"Investment","src":[2]}
+  ],
+  "tenders": [
+    {"date":"TO VERIFY","buyer":"No public tender data captured yet","country":"","product":"FluMist, Synagis","value":"","src":[]}
+  ],
+  "tenderNote": "Beyfortus tenders are run by Sanofi as the selling partner; see the Sanofi page.",
+  "plants": [
+    {"site":"Beyfortus supply","country":"Partner network","tech":"Monoclonal antibody","cap":"Second external filling line licensed 2024 (per Sanofi)","src":[7]},
+    {"site":"Other sites","country":"TO VERIFY","tech":"TO VERIFY","cap":"TO VERIFY","src":[]}
+  ],
+  "call": {
+    "title":"H1 and Q2 2026 results, 27 July 2026",
+    "points":[
+      {"t":"Total revenue Q2 2026 $15.4bn, +5% at CER","src":[5]},
+      {"t":"Beyfortus Q2 $79m, -37%: partner adjusted inventory","src":[1]},
+      {"t":"FluMist Q2 $18m, +78% at CER","src":[1]},
+      {"t":"Synagis declining due to competition from Beyfortus","src":[1]},
+      {"t":"On track for $80bn total revenue in 2030","src":[5]}
+    ]
+  },
+  "sources": [
+    {"id":1,"t":"Half-year financial report 2026 (RNS)","o":"AstraZeneca, via Investegate","u":"https://www.investegate.co.uk/announcement/rns/astrazeneca--azn/half-year-financial-report/9687613"},
+    {"id":2,"t":"FY and Q4 2025 results (Form 6-K)","o":"AstraZeneca / SEC","u":"https://www.sec.gov/Archives/edgar/data/901832/000165495426001073/a3234s.htm"},
+    {"id":3,"t":"H1 2025 results (Form 6-K)","o":"AstraZeneca / SEC","u":"https://www.sec.gov/Archives/edgar/data/901832/000110465925071432/azn-20250630x6k.htm"},
+    {"id":4,"t":"9M and Q3 2025 results (Form 6-K)","o":"AstraZeneca / SEC","u":"https://www.sec.gov/Archives/edgar/data/901832/000165495425012630/a4030g.htm"},
+    {"id":5,"t":"AstraZeneca results: H1 and Q2 2026 (republished)","o":"AstraZeneca, via BioSpace","u":"https://www.biospace.com/press-releases/astrazeneca-results-h1-and-q2-2026","secondary":true},
+    {"id":6,"t":"AstraZeneca launches the first FDA-approved influenza vaccine for self or caregiver administration","o":"Chain Drug Review","u":"https://chaindrugreview.com/astrazeneca-launches-the-first-fda-approved-influenza-vaccine-available-for-self-or-caregiver-administration","secondary":true},
+    {"id":7,"t":"Q3 2024 results press release (Form 6-K)","o":"Sanofi / SEC","u":"https://www.sec.gov/Archives/edgar/data/1121404/000112140424000020/pressreleaseq32024english.htm"}
   ]
 }
 }
@@ -392,8 +763,203 @@ footer{margin-top:40px;font-size:13px;color:var(--muted);border-top:1px solid va
   {"k":"HA","v":"hemagglutinin, the main protein on the surface of the flu virus"},
   {"k":"MPL","v":"monophosphoryl lipid A, an adjuvant ingredient"},
   {"k":"CpG","v":"cytosine phosphate guanine, a DNA pattern used as an adjuvant"},
-  {"k":"HIV","v":"human immunodeficiency virus"}
+  {"k":"HIV","v":"human immunodeficiency virus"},
+  {"k":"PCV","re":"\\bPCV\\b","v":"pneumococcal conjugate vaccine"},
+  {"k":"MenB","v":"meningococcal group B"},
+  {"k":"TB","v":"tuberculosis"},
+  {"k":"Gates MRI","v":"Gates Medical Research Institute, a non-profit"},
+  {"k":"AS01B / AS01E","re":"AS01[BE]","v":"GSK adjuvant systems based on MPL and QS-21"},
+  {"k":"MAA","v":"Marketing Authorisation Application, the EU approval file"},
+  {"k":"XFG","v":"name of a SARS-CoV-2 (COVID-19 virus) variant used in 2026 to 2027 vaccines"},
+  {"k":"UNICEF","v":"United Nations Children's Fund, the largest single buyer of vaccines"},
+  {"k":"PAHO","v":"Pan American Health Organization"},
+  {"k":"Gavi","v":"Gavi, the Vaccine Alliance, funds vaccines for lower-income countries"},
+  {"k":"JPA","v":"Joint Procurement Agreement, lets EU and other countries buy together"},
+  {"k":"TFEU","v":"Treaty on the Functioning of the European Union"},
+  {"k":"HIC / MIC","re":"\\b[HM]ICs?\\b","v":"high-income country / middle-income country (World Bank groups)"},
+  {"k":"VFC","v":"Vaccines for Children, a US federal program"},
+  {"k":"FX","v":"foreign exchange (currency) effects"}
 ]
+</script>
+
+<!-- LEARN PAGES: Like I'm 5, Marketplace, Price types. Each page is a list of sections and blocks.
+     Block types: p, list, table, cards, split (100% bars), waterfall, lens. -->
+<script id="learn-data" type="application/json">
+{
+"eli5": {
+  "eyebrow":"Learn · Start here",
+  "title":"Like I'm 5",
+  "intro":"Every big idea on this site, explained as if to a 5-year-old. Read this first, then open the full page for each topic.",
+  "lastUpdated":"12 October 2026",
+  "sections":[
+    {"h":"The ten big ideas","blocks":[
+      {"type":"cards","items":[
+        {"icon":"shield","t":"What is a vaccine?","d":"A practice drill for your body. It shows your body a harmless picture of a germ, so if the real germ comes, your body already knows how to fight it.","real":"Real words: the vaccine carries an antigen that trains the immune system.","go":"basics","src":[1]},
+        {"icon":"puzzle","t":"Vaccine technologies","d":"There are different ways to make the practice picture: a sleepy germ, a broken germ, just one piece of the germ, or a recipe card so your body draws the piece itself.","real":"Real words: live-attenuated, inactivated, subunit, mRNA.","go":"basics","src":[2]},
+        {"icon":"steps","t":"Approval","d":"Before a vaccine reaches people, grown-ups test it again and again, like checking a new slide many times before children can play on it.","real":"Real words: Phase 1, 2, 3 trials, then FDA or EMA review.","go":"basics","src":[3]},
+        {"icon":"ladder","t":"Pipeline","d":"A pipeline is a line of new vaccines climbing a ladder. Each step is a harder test. Many never reach the top.","real":"Real words: candidates move from preclinical to Phase 3 and filing.","go":"basics","src":[3]},
+        {"icon":"market","t":"The vaccine market","d":"A big shop where countries buy vaccines. Rich countries pay most of the money. Poorer countries buy many doses at low prices through helpers like UNICEF.","real":"Real words: high-income countries are 24% of doses but 72% of value.","go":"market","src":[4]},
+        {"icon":"race","t":"Competitors","d":"Other teams racing to make the best vaccine for the same illness. In pneumococcal vaccines, Pfizer, MSD and new teams race to cover more germ types.","real":"Real words: valency race, for example 20, 21, 25 and 31 types.","go":"pfizer","src":[5]},
+        {"icon":"link","t":"M&A and partnerships","d":"One company buys another, or two companies hold hands to build something together, so they can grow faster.","real":"Real words: acquisitions, licensing, co-development, supply deals.","go":"sanofi","src":[6]},
+        {"icon":"tag","t":"Price types","d":"The sticker on the box is the list price. After discounts, the price really paid is the net price.","real":"Real words: list price, rebates, net price, tender price.","go":"prices","src":[7]},
+        {"icon":"envelope","t":"Tenders","d":"A sealed-letter contest. A government says what it needs, companies send secret offers, and the best offer wins.","real":"Real words: public procurement with transparent, equal rules.","go":"prices","src":[8]},
+        {"icon":"scale","t":"Fair-play rules","d":"Companies must not secretly agree prices with each other, and buyers must treat every company the same.","real":"Real words: EU competition law and public procurement law.","go":"prices","src":[8,9]}
+      ]}
+    ]}
+  ],
+  "sources":[
+    {"id":1,"t":"Explaining How Vaccines Work","o":"CDC","u":"https://www.cdc.gov/vaccines/basics/explaining-how-vaccines-work.html"},
+    {"id":2,"t":"Vaccine Types","o":"HHS","u":"https://www.hhs.gov/immunization/basics/types/index.html"},
+    {"id":3,"t":"How Vaccines are Developed and Approved for Use","o":"CDC","u":"https://www.cdc.gov/vaccines/basics/how-developed-approved.html"},
+    {"id":4,"t":"WHO releases global vaccine market report 2024 (summary of WHO report)","o":"Immunization Economics","u":"https://immunizationeconomics.org/recent-activity/2025/2/17/who-releases-global-vaccine-market-report-2024","secondary":true},
+    {"id":5,"t":"Vaxcyte reports positive topline data from OPUS-1 Phase 3 trial of VAX-31","o":"Vaxcyte, via GlobeNewswire","u":"https://www.globenewswire.com/news-release/2026/10/05/3374299/0/en/vaxcyte-reports-positive-topline-data-from-opus-1-the-pivotal-adult-phase-3-trial-of-vax-31-the-company-s-31-valent-pneumococcal-conjugate-vaccine-candidate.html"},
+    {"id":6,"t":"Half-year management report 2026","o":"Sanofi / SEC","u":"https://www.sec.gov/Archives/edgar/data/0001121404/000162828026050803/exhibit992-2026halfyearman.htm"},
+    {"id":7,"t":"Current CDC Vaccine Price List","o":"CDC","u":"https://www.cdc.gov/vaccines-for-children/php/awardees/current-cdc-vaccine-price-list.html"},
+    {"id":8,"t":"Public procurement: legal rules and implementation","o":"European Commission","u":"https://single-market-economy.ec.europa.eu/single-market/public-procurement/legal-rules-and-implementation_en"},
+    {"id":9,"t":"Guidelines on horizontal cooperation agreements (2023/C 259/01)","o":"European Commission","u":"https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:52023XC0721(01)"}
+  ]
+},
+"market": {
+  "eyebrow":"Learn · Marketplace",
+  "title":"The vaccine marketplace",
+  "intro":"Who buys vaccines, through which channels, and how the money splits between rich and poorer countries.",
+  "lastUpdated":"12 October 2026",
+  "sections":[
+    {"h":"Doses vs money","blocks":[
+      {"type":"split","title":"Global vaccine market by buyer group, 2023","src":[1],"rows":[
+        {"k":"Share of doses","parts":[{"k":"Self-procuring MICs","v":40,"c":"--blue"},{"k":"Pooled (UNICEF, PAHO)","v":36,"c":"--lblue"},{"k":"Self-procuring HICs","v":24,"c":"--violet"}]},
+        {"k":"Share of value","parts":[{"k":"Self-procuring MICs","v":24,"c":"--blue"},{"k":"Pooled (UNICEF, PAHO)","v":4,"c":"--lblue"},{"k":"Self-procuring HICs","v":72,"c":"--violet"}]}
+      ]},
+      {"type":"lens","t":"High-income countries buy about a quarter of doses but pay about three quarters of the money. That is why US and European prices and recommendations drive company results.","src":[1]}
+    ]},
+    {"h":"Who buys","blocks":[
+      {"type":"table","cols":["Buyer or channel","How it works","Key fact"],"rows":[
+        {"c":["UNICEF Supply Division","Buys vaccines for lower-income countries, often with Gavi funding","2.787 billion doses delivered to 99 countries in 2024, enough for 45% of the world's children under 5"],"src":[2]},
+        {"c":["PAHO Revolving Fund","Pools demand of countries in the Americas and negotiates prices","Running for more than 40 years; PAHO says countries would pay at least 75% more without it"],"src":[3]},
+        {"c":["EU Joint Procurement Agreement","Countries buy together through the European Commission","37 countries signed as of April 2020; for example, a 6-country contract for up to 24 million RSV doses in 2026"],"src":[4,5]},
+        {"c":["US CDC contracts","Federal contracts used by state health departments and immunization programs","Private providers cannot buy through CDC contracts; CDC publishes contract and private-sector prices"],"src":[6]},
+        {"c":["National tenders","Each country runs its own public tenders under its procurement law","Price pressure example: Sanofi cited German flu tenders in 2025"],"src":[7,8]},
+        {"c":["Private market","Pharmacies, doctors and private insurers buy at private-sector prices","Uptake depends on official recommendations and reimbursement"],"src":[6]}
+      ]}
+    ]},
+    {"h":"Vaccine sales of the six companies, FY 2025","blocks":[
+      {"type":"table","cols":["Company","Vaccine sales","Main products"],"rows":[
+        {"c":["Pfizer","$11,894m (3 main vaccines, calculated)","Prevnar, Comirnaty, Abrysvo"],"src":[9]},
+        {"c":["MSD","$9,941m (main vaccine lines, calculated)","Gardasil, MMR and varicella, Vaxneuvance, Capvaxive, RotaTeq"],"src":[10]},
+        {"c":["GSK","£9,157m","Shingrix, established vaccines, meningitis, Arexvy"],"src":[11]},
+        {"c":["Sanofi","€7,936m","Pediatric combinations, flu and COVID-19, Beyfortus, meningitis"],"src":[12]},
+        {"c":["Moderna","$1,818m (net product sales)","Spikevax, mNEXSPIKE, mRESVIA"],"src":[13]},
+        {"c":["AstraZeneca","$1,268m (Vaccines and Immune Therapies)","Beyfortus supply, Synagis, FluMist"],"src":[14]}
+      ]},
+      {"type":"p","t":"Figures are in each company's reporting currency and are not converted, so compare with care. Definitions also differ: some companies report a vaccines total, others only product lines."}
+    ]}
+  ],
+  "sources":[
+    {"id":1,"t":"WHO releases global vaccine market report 2024 (summary of WHO report, reference year 2023)","o":"Immunization Economics","u":"https://immunizationeconomics.org/recent-activity/2025/2/17/who-releases-global-vaccine-market-report-2024","secondary":true},
+    {"id":2,"t":"Visual highlights of the UNICEF Supply Annual Report 2024","o":"UNICEF","u":"https://www.unicef.org/supply/reports/unicef-supply-annual-report-2024"},
+    {"id":3,"t":"PAHO Revolving Fund","o":"PAHO","u":"https://www.paho.org/en/revolving-fund"},
+    {"id":4,"t":"Procurement and stockpiling","o":"European Commission","u":"https://health.ec.europa.eu/health-emergency-preparedness-and-response-hera/preparedness/procurement-and-stockpiling_en"},
+    {"id":5,"t":"Q2 2026 financial results press release (Form 8-K)","o":"Moderna / SEC","u":"https://www.sec.gov/Archives/edgar/data/0001682852/000168285226000147/exhibit9912026q2pressrelea.htm"},
+    {"id":6,"t":"Current CDC Vaccine Price List","o":"CDC","u":"https://www.cdc.gov/vaccines-for-children/php/awardees/current-cdc-vaccine-price-list.html"},
+    {"id":7,"t":"Public procurement: legal rules and implementation","o":"European Commission","u":"https://single-market-economy.ec.europa.eu/single-market/public-procurement/legal-rules-and-implementation_en"},
+    {"id":8,"t":"Q3 2025 results press release (Form 6-K)","o":"Sanofi / SEC","u":"https://www.sec.gov/Archives/edgar/data/1121404/000112140425000026/pressreleaseq32025english.htm"},
+    {"id":9,"t":"Q4 2025 earnings release","o":"Pfizer","u":"https://s206.q4cdn.com/795948973/files/doc_financials/2025/q4/Q4-2025-PFE-Earnings-Release-FINAL2.pdf"},
+    {"id":10,"t":"Q4 and full year 2025 earnings announcement","o":"Merck","u":"https://www.merck.com/wp-content/uploads/sites/124/2026/02/4Q25-Merck-Earnings-Announcement.pdf"},
+    {"id":11,"t":"FY 2025 final results (RNS)","o":"GSK, via Investegate","u":"https://www.investegate.co.uk/announcement/rns/gsk--gsk/final-results/9406766"},
+    {"id":12,"t":"Q4 and FY 2025 results press release (Form 6-K)","o":"Sanofi / SEC","u":"https://www.sec.gov/Archives/edgar/data/1121404/000112140426000001/pressreleaseq42025english.htm"},
+    {"id":13,"t":"Q4 and FY 2025 financial results press release (Form 8-K)","o":"Moderna / SEC","u":"https://www.sec.gov/Archives/edgar/data/1682852/000168285226000015/exhibit9912025q4pressrelea.htm"},
+    {"id":14,"t":"FY and Q4 2025 results (Form 6-K)","o":"AstraZeneca / SEC","u":"https://www.sec.gov/Archives/edgar/data/901832/000165495426001073/a3234s.htm"}
+  ]
+},
+"prices": {
+  "eyebrow":"Learn · Prices and rules",
+  "title":"Price types and fair-play rules",
+  "intro":"How a vaccine price moves from the list price to what a buyer really pays, and the legal rules every analyst must follow. Concepts only: no confidential prices on this site.",
+  "lastUpdated":"12 October 2026",
+  "sections":[
+    {"h":"From list price to net price","blocks":[
+      {"type":"waterfall","title":"How a price is built (illustrative index, not real prices)","steps":[
+        {"k":"List price","v":100,"kind":"total"},
+        {"k":"Discounts","v":-12,"kind":"minus"},
+        {"k":"Rebates","v":-10,"kind":"minus"},
+        {"k":"Other deductions","v":-5,"kind":"minus"},
+        {"k":"Net price","v":73,"kind":"total"}
+      ]},
+      {"type":"p","t":"The gap between list and net price is called gross-to-net. Companies estimate rebates and returns in advance, then correct them later, which can move quarterly sales.","src":[1,2,3]}
+    ]},
+    {"h":"Price types","blocks":[
+      {"type":"table","cols":["Price type","What it means","Where you see it"],"rows":[
+        {"c":["List price","The official catalogue price before any discount","Company price lists; CDC private-sector prices in the US"],"src":[4]},
+        {"c":["Ex-factory price","The price the manufacturer charges when the product leaves its hands, before distributor margins","National pricing rules; TO VERIFY by country"],"src":[]},
+        {"c":["Contract or public price","Price agreed in a government contract","CDC contract prices for US immunization programs"],"src":[4]},
+        {"c":["Tender price","Price offered and accepted in a public tender","Tender award notices, for example on TED in the EU"],"src":[5]},
+        {"c":["Net price","What the buyer really pays after discounts, rebates and returns","Not public; companies report net sales only"],"src":[1,2]},
+        {"c":["Reimbursement price","The amount a public payer or insurer pays back","National health insurance lists; TO VERIFY by country"],"src":[]}
+      ]},
+      {"type":"lens","t":"Real examples from 2026 results: Sanofi cited positive gross-to-net adjustments, GSK said about 3 points of Q2 vaccines growth came from rebate adjustments, and Pfizer cited a returns provision on Comirnaty.","src":[1,2,3]}
+    ]},
+    {"h":"Fair-play rules","blocks":[
+      {"type":"list","items":[
+        {"t":"EU competition law (Article 101 TFEU) bans agreements between competitors that restrict competition.","src":[6]},
+        {"t":"Sharing future prices or quantities with a competitor is treated as a serious restriction under the European Commission's 2023 horizontal guidelines.","src":[6]},
+        {"t":"Never ask a competitor's staff about prices, tenders or capacity, even informally. Use only public sources.","src":[6]},
+        {"t":"EU public procurement (Directive 2014/24/EU) rests on transparency, equal treatment, open competition and sound procedure.","src":[5]},
+        {"t":"When unsure whether a source or a conversation is allowed, ask the Legal or Compliance team first.","src":[]}
+      ]}
+    ]}
+  ],
+  "sources":[
+    {"id":1,"t":"Q2 2026 earnings call highlights","o":"MarketBeat summary of Sanofi call","u":"https://www.marketbeat.com/instant-alerts/sanofi-q2-earnings-call-highlights-2026-07-30/","secondary":true},
+    {"id":2,"t":"Q2 2026 results announcement (Form 6-K)","o":"GSK / SEC","u":"https://www.sec.gov/Archives/edgar/data/0001131399/000165495426006949/a1493o.htm"},
+    {"id":3,"t":"Pfizer reports second-quarter results (republished)","o":"Pfizer, via BioSpace","u":"https://www.biospace.com/press-releases/pfizer-reports-second-quarter-results-and-raises-midpoint-of-2026-revenue-guidance","secondary":true},
+    {"id":4,"t":"Current CDC Vaccine Price List","o":"CDC","u":"https://www.cdc.gov/vaccines-for-children/php/awardees/current-cdc-vaccine-price-list.html"},
+    {"id":5,"t":"Public procurement: legal rules and implementation","o":"European Commission","u":"https://single-market-economy.ec.europa.eu/single-market/public-procurement/legal-rules-and-implementation_en"},
+    {"id":6,"t":"Guidelines on horizontal cooperation agreements (2023/C 259/01)","o":"European Commission","u":"https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:52023XC0721(01)"}
+  ],
+  "footnote":"The price waterfall uses an illustrative index. Ask the Market Access team for Sanofi's internal definitions."
+}
+}
+</script>
+
+<!-- GLOSSARY: extra terms (acronyms come from the ACRONYMS block automatically). -->
+<script id="terms-data" type="application/json">
+[
+  {"k":"Active immunity","v":"Protection your own immune system builds after vaccination or infection. Slower to start, lasts years."},
+  {"k":"Adjuvant","v":"An ingredient that helps a vaccine trigger a stronger immune response."},
+  {"k":"Alliance revenue","v":"A company's share of profits or royalties from a product sold by a partner, for example AstraZeneca on Beyfortus."},
+  {"k":"Antigen","v":"The part of a germ (or a harmless copy) that teaches the immune system what to recognise."},
+  {"k":"Booster","v":"An extra dose given later to keep protection high."},
+  {"k":"Conjugate vaccine","v":"A vaccine where a germ's sugar coat is linked to a protein so it works in children under 2."},
+  {"k":"Effectiveness","v":"How well a vaccine works in everyday use across a large population."},
+  {"k":"Efficacy","v":"How much a vaccine lowers disease risk compared with placebo in a controlled trial."},
+  {"k":"Gross-to-net","v":"The gap between list-price sales and net sales after discounts, rebates and returns."},
+  {"k":"Immunogenicity","v":"How strongly a vaccine makes the body produce antibodies and other defences."},
+  {"k":"Live-attenuated vaccine","v":"A vaccine made from a weakened form of the germ."},
+  {"k":"Monoclonal antibody","v":"A lab-made antibody that gives ready-made (passive) protection, for example Beyfortus."},
+  {"k":"Net price","v":"The price a buyer really pays after discounts and rebates."},
+  {"k":"Passive immunity","v":"Ready-made antibodies given to a person. Works right away, fades within weeks to months."},
+  {"k":"Pipeline","v":"All the products a company is developing, from lab research to filing."},
+  {"k":"Pooled procurement","v":"Several countries buying together to get better prices and secure supply."},
+  {"k":"Rebate","v":"Money a manufacturer pays back to a buyer or payer after the sale."},
+  {"k":"Relative vaccine efficacy","v":"Efficacy compared with an already licensed vaccine instead of a placebo."},
+  {"k":"Tender","v":"A public contest where buyers ask companies for offers and award a contract under set rules."},
+  {"k":"Valency","v":"How many strains or types a vaccine covers, for example 21-valent."}
+]
+</script>
+
+<!-- TODAY PAGES: news log. Keep 7 days of items. Before adding an item, check the log for the same event.
+     "asOf" is the date the page treats as today. Items older than 7 days drop off automatically. -->
+<script id="news-data" type="application/json">
+{
+  "asOf":"2026-10-12",
+  "items":[
+    {"scope":"competitor","date":"2026-10-05","company":"Vaxcyte (vs Pfizer, MSD)","type":"Clinical data","headline":"VAX-31 pneumococcal vaccine met all main goals in adult Phase 3 OPUS-1","summary":"31-valent vaccine compared with Prevnar 20 and Capvaxive in about 4,000 US adults; two serotypes missed the stricter bar against Capvaxive. US filing planned H1 2028.","why":"Raises the valency race in adult pneumococcal vaccines; relevant to the Sanofi and SK bioscience 21-valent program.","src":"https://www.globenewswire.com/news-release/2026/10/05/3374299/0/en/vaxcyte-reports-positive-topline-data-from-opus-1-the-pivotal-adult-phase-3-trial-of-vax-31-the-company-s-31-valent-pneumococcal-conjugate-vaccine-candidate.html","srcName":"Vaxcyte, via GlobeNewswire"},
+    {"scope":"sanofi","date":"2026-10-06","company":"Sanofi","type":"Investor","headline":"Aide-mémoire for Q3 2026 results published; results on 30 October 2026","summary":"Modelling notes for analysts ahead of the Q3 results.","why":"Q3 is the peak quarter for flu vaccine and Beyfortus deliveries.","src":"https://www.globenewswire.com/news-release/2026/10/06/3375120/0/en/press-release-availability-of-the-aide-m%C3%A9moire-for-q3-2026-results.html","srcName":"Sanofi, via GlobeNewswire"}
+  ],
+  "upcoming":[
+    {"date":"2026-10-30","t":"Sanofi Q3 2026 results","src":"https://www.globenewswire.com/news-release/2026/10/06/3375120/0/en/press-release-availability-of-the-aide-m%C3%A9moire-for-q3-2026-results.html"}
+  ]
+}
 </script>
 
 <!-- VACCINE BASICS PAGE: all text and sources for the Learn > Vaccine basics page. -->
@@ -505,23 +1071,23 @@ footer{margin-top:40px;font-size:13px;color:var(--muted);border-top:1px solid va
     <ul id="co-nav">
       <li><a href="#sanofi" data-key="sanofi">Sanofi</a></li>
       <li><a href="#moderna" data-key="moderna">Moderna</a></li>
-      <li><span>GSK <em>soon</em></span></li>
-      <li><span>MSD <em>soon</em></span></li>
-      <li><span>Pfizer <em>soon</em></span></li>
-      <li><span>AstraZeneca <em>soon</em></span></li>
+      <li><a href="#gsk" data-key="gsk">GSK</a></li>
+      <li><a href="#msd" data-key="msd">MSD</a></li>
+      <li><a href="#pfizer" data-key="pfizer">Pfizer</a></li>
+      <li><a href="#astrazeneca" data-key="astrazeneca">AstraZeneca</a></li>
     </ul>
     <h4>Learn</h4>
     <ul id="learn-nav">
+      <li><a href="#eli5" data-key="eli5">Like I'm 5</a></li>
       <li><a href="#basics" data-key="basics">Vaccine basics</a></li>
-      <li><span>Like I'm 5 <em>soon</em></span></li>
-      <li><span>Marketplace <em>soon</em></span></li>
-      <li><span>Price types <em>soon</em></span></li>
-      <li><span>Glossary <em>soon</em></span></li>
+      <li><a href="#market" data-key="market">Marketplace</a></li>
+      <li><a href="#prices" data-key="prices">Price types and rules</a></li>
+      <li><a href="#glossary" data-key="glossary">Glossary</a></li>
     </ul>
     <h4>Today</h4>
-    <ul class="more">
-      <li><span>Competitor news <em>soon</em></span></li>
-      <li><span>Sanofi update <em>soon</em></span></li>
+    <ul id="today-nav">
+      <li><a href="#news" data-key="news">Competitor news</a></li>
+      <li><a href="#sanofi-news" data-key="sanofi-news">Sanofi update</a></li>
     </ul>
   </nav>
 
@@ -676,11 +1242,99 @@ footer{margin-top:40px;font-size:13px;color:var(--muted);border-top:1px solid va
     $('foot').textContent='Not an official Sanofi website. Official health agency sources. Last updated '+B.lastUpdated+'.';
   }
 
-  function render(key){
-    if(key==='basics'){
-      $('view-company').hidden=true; $('view-basics').hidden=false;
-      setActive('basics'); renderBasics(); acronyms(); return;
+  const LEARN = JSON.parse(document.getElementById('learn-data').textContent);
+  const TERMS = JSON.parse(document.getElementById('terms-data').textContent);
+  const NEWS = JSON.parse(document.getElementById('news-data').textContent);
+  const ICON = {
+    shield:'<path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z"/><path d="M9 12l2 2 4-4"/>',
+    puzzle:'<rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="3.5"/><rect x="4" y="13" width="7" height="7" rx="3.5"/><path d="M13 13h7v7h-7z"/>',
+    steps:'<path d="M4 20h4v-4h4v-4h4V8h4"/><path d="M4 20h16"/>',
+    ladder:'<path d="M8 3v18M16 3v18M8 7h8M8 12h8M8 17h8"/>',
+    market:'<path d="M4 9l2-5h12l2 5"/><path d="M5 9v11h14V9"/><path d="M10 20v-6h4v6"/>',
+    race:'<path d="M5 21V4"/><path d="M5 4h11l-2 4 2 4H5"/>',
+    link:'<rect x="3" y="9" width="9" height="6" rx="3"/><rect x="12" y="9" width="9" height="6" rx="3"/>',
+    tag:'<path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="8.5" r="1.5"/>',
+    envelope:'<rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 8l9 6 9-6"/>',
+    scale:'<path d="M12 4v16M7 20h10M5 8h14"/><path d="M5 8l-3 6h6zM19 8l-3 6h6z"/>'
+  };
+  const icon = k => '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+(ICON[k]||'')+'</svg>';
+  const DOC_KEYS = ['eli5','market','prices'];
+  const sec = (n,t,body,cls) => '<section'+(cls?' class="'+cls+'"':'')+'><div class="sec-head"><span class="n">'+n+'</span><h2>'+t+'</h2></div>'+body+'</section>';
+  const srcList = (list,pre,date,n) => '<section class="sources"><div class="sec-head"><span class="n">'+n+'</span><h2>Sources</h2></div><ol>'+list.map(s=>'<li id="'+pre+s.id+'" value="'+s.id+'"><a href="'+esc(s.u)+'" target="_blank" rel="noopener">'+esc(s.t)+'</a>, '+esc(s.o)+(s.secondary?'<span class="sec2">secondary</span>':'')+'. Accessed '+esc(date)+'.</li>').join('')+'</ol></section>';
+  const pad = i => (i<9?'0':'')+(i+1);
+  const DARK_TXT = ['--lblue','--smoke','--lime'];
+
+  function block(b,c){
+    const opt = a => a ? c(a) : '';
+    switch(b.type){
+      case 'p': return '<p class="note" style="margin:0 0 12px">'+tv(b.t)+opt(b.src)+'</p>';
+      case 'lens': return '<p class="lens"><b>Market lens</b>'+tv(b.t)+((b.src||[]).length?c(b.src):'')+'</p>';
+      case 'list': return '<ul class="takeaways">'+b.items.map(i=>'<li><span>'+tv(i.t)+((i.src||[]).length?c(i.src):'')+'</span></li>').join('')+'</ul>';
+      case 'table': return '<div class="tbl"><table><thead><tr>'+b.cols.map(x=>'<th>'+esc(x)+'</th>').join('')+'</tr></thead><tbody>'+b.rows.map(r=>'<tr>'+r.c.map((x,i)=>'<td>'+(i===0?'<b>'+tv(x)+'</b>'+c(r.src):tv(x))+'</td>').join('')+'</tr>').join('')+'</tbody></table></div>';
+      case 'cards': return '<div class="cards5">'+b.items.map(i=>'<div class="c5"><div class="ic">'+icon(i.icon)+'</div><h3>'+esc(i.t)+'</h3><p>'+esc(i.d)+'</p><p class="real">'+esc(i.real)+c(i.src)+'</p>'+(i.go?'<a class="go" href="#'+esc(i.go)+'" data-go="'+esc(i.go)+'">Open the full page</a>':'')+'</div>').join('')+'</div>';
+      case 'split': return '<div class="split"><div class="chart-title">'+esc(b.title)+c(b.src)+'</div>'+b.rows.map(r=>'<div class="row"><div class="k">'+esc(r.k)+'</div><div class="bar" role="img" aria-label="'+esc(r.k+': '+r.parts.map(p=>p.k+' '+p.v+'%').join(', '))+'">'+r.parts.map(p=>'<span style="width:'+p.v+'%;background:var('+p.c+');'+(DARK_TXT.includes(p.c)?'color:#080000':'')+'" title="'+esc(p.k)+': '+p.v+'%">'+(p.v>=8?p.v+'%':'')+'</span>').join('')+'</div></div>').join('')+'<div class="legend">'+b.rows[0].parts.map(p=>'<span><i style="background:var('+p.c+')"></i>'+esc(p.k)+'</span>').join('')+'</div></div>';
+      case 'waterfall': {
+        const W=560,H=230,L=40,R=10,T=20,B=40,n=b.steps.length,cw=(W-L-R)/n,bw=cw*.6,Y=v=>T+(H-T-B)*(1-v/100);
+        let run=0, s='<div class="chart-title">'+esc(b.title)+'</div><svg viewBox="0 0 '+W+' '+H+'" width="100%" style="min-width:420px" role="img" aria-label="'+esc(b.title)+'">';
+        [0,25,50,75,100].forEach(t=>{s+='<line x1="'+L+'" x2="'+(W-R)+'" y1="'+Y(t)+'" y2="'+Y(t)+'" style="stroke:var(--line)"/><text class="ax" x="'+(L-6)+'" y="'+(Y(t)+4)+'" text-anchor="end">'+t+'</text>';});
+        b.steps.forEach((st,i)=>{let top,bot,fill;
+          if(st.kind==='total'){run=st.v; top=Y(st.v); bot=Y(0); fill='--violet';}
+          else {top=Y(run); run+=st.v; bot=Y(run); fill='--smoke';}
+          const x=L+i*cw+(cw-bw)/2;
+          s+='<rect x="'+x+'" y="'+top+'" width="'+bw+'" height="'+(bot-top)+'" rx="3" style="fill:var('+fill+')"/><text class="val" x="'+(x+bw/2)+'" y="'+(top-5)+'" text-anchor="middle">'+st.v+'</text><text class="ax" x="'+(x+bw/2)+'" y="'+(H-B+16)+'" text-anchor="middle">'+esc(st.k)+'</text>';});
+        return '<div class="chart-wrap">'+s+'</svg></div>';
+      }
     }
+    return '';
+  }
+
+  function renderDoc(P){
+    const c = a => cite(a,'d');
+    let h='<header><div class="eyebrow">'+esc(P.eyebrow)+'</div><h1>'+esc(P.title)+'<span class="dot">.</span></h1><p class="lede">'+esc(P.intro)+'</p><div class="meta"><span>Last updated <b>'+esc(P.lastUpdated)+'</b></span></div></header>';
+    P.sections.forEach((S,i)=>{ h+=sec(pad(i),esc(S.h),S.blocks.map(b=>block(b,c)).join('')); });
+    h+=srcList(P.sources,'d',P.lastUpdated,pad(P.sections.length));
+    if(P.footnote) h+='<p class="note">'+esc(P.footnote)+'</p>';
+    $('view-basics').innerHTML=h;
+    $('foot').textContent='Not an official Sanofi website. Public information only. Last updated '+P.lastUpdated+'.';
+  }
+
+  function renderGlossary(){
+    const all = GL.map(g=>({k:g.k,v:g.v,kind:'Acronym'})).concat(TERMS.map(t=>({k:t.k,v:t.v,kind:'Term'}))).sort((a,b)=>a.k.toLowerCase().localeCompare(b.k.toLowerCase()));
+    let h='<header><div class="eyebrow">Learn · Reference</div><h1>Glossary<span class="dot">.</span></h1><p class="lede">Every acronym and key term used on this site, in one place. Type to filter.</p><div class="meta"><span><b>'+all.length+'</b> entries</span></div></header>';
+    h+='<section class="noacr"><label for="gl-q" class="eyebrow" style="display:block;margin-bottom:6px">Search</label><input id="gl-q" class="glsearch" type="search" placeholder="For example: RSV, tender, adjuvant" autocomplete="off"><dl class="gl" id="gl-list">'+all.map(e=>'<div data-s="'+esc((e.k+' '+e.v).toLowerCase())+'"><dt>'+esc(e.k)+'<span class="kind">'+e.kind+'</span></dt><dd>'+esc(e.v)+'</dd></div>').join('')+'</dl><p class="note" id="gl-none" hidden>No match. Try a shorter word.</p></section>';
+    $('view-basics').innerHTML=h;
+    const q=$('gl-q');
+    q.addEventListener('input',()=>{const v=q.value.trim().toLowerCase(); let shown=0; document.querySelectorAll('#gl-list > div').forEach(d=>{const on=!v||d.dataset.s.includes(v); d.hidden=!on; if(on) shown++;}); $('gl-none').hidden=shown>0;});
+    $('foot').textContent='Not an official Sanofi website. Definitions in plain language for onboarding.';
+  }
+
+  function renderNews(scope){
+    const asOf=new Date(NEWS.asOf+'T00:00:00'), day=864e5;
+    const fmtD = s => new Date(s+'T00:00:00').toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
+    const items=NEWS.items.filter(i=>i.scope===scope).filter(i=>{const d=(asOf-new Date(i.date+'T00:00:00'))/day; return d>=0 && d<7;}).sort((a,b)=>b.date.localeCompare(a.date));
+    const today=items.filter(i=>i.date===NEWS.asOf);
+    const card=i=>'<li><div class="top"><span class="phase">'+esc(i.type)+'</span><span>'+fmtD(i.date)+'</span><b>'+esc(i.company)+'</b></div><h3>'+esc(i.headline)+'</h3><p>'+esc(i.summary)+'</p><p class="why"><b>Why it matters for Sanofi vaccines:</b> '+esc(i.why)+'</p><p style="font-size:13px"><a href="'+esc(i.src)+'" target="_blank" rel="noopener">'+esc(i.srcName)+'</a></p></li>';
+    const title = scope==='sanofi' ? 'Sanofi update' : 'Competitor news';
+    let h='<header><div class="eyebrow">Today · '+(scope==='sanofi'?'Official Sanofi news':'GSK, MSD, Pfizer, Moderna, AstraZeneca and others')+'</div><h1>'+title+'<span class="dot">.</span></h1><p class="lede">New items from the last 24 hours, plus a 7-day log used to avoid repeating the same story.</p><div class="meta"><span>Today <b>'+fmtD(NEWS.asOf)+'</b></span></div></header>';
+    h+=sec('01','New today', today.length?'<ul class="news">'+today.map(card).join('')+'</ul>':'<p class="empty">No new update today.</p>');
+    h+=sec('02','Last 7 days', items.length?'<ul class="news">'+items.map(card).join('')+'</ul>':'<p class="empty">Nothing in the last 7 days.</p>');
+    if(scope==='sanofi' && (NEWS.upcoming||[]).length) h+=sec('03','Coming up','<ul class="takeaways">'+NEWS.upcoming.map(u=>'<li><span><b>'+fmtD(u.date)+'</b>: <a href="'+esc(u.src)+'" target="_blank" rel="noopener">'+esc(u.t)+'</a></span></li>').join('')+'</ul>');
+    h+='<p class="note">Rules: official sources first; one item per event, even if many outlets report it; no item that already appears in the 7-day log. To add news, edit the TODAY PAGES block in the file.</p>';
+    $('view-basics').innerHTML=h;
+    $('foot').textContent='Not an official Sanofi website. Public information only.';
+  }
+
+  function showDoc(key, fn){
+    $('view-company').hidden=true; $('view-basics').hidden=false;
+    setActive(key); fn(); acronyms();
+  }
+
+  function render(key){
+    if(key==='basics') return showDoc(key, renderBasics);
+    if(DOC_KEYS.includes(key)) return showDoc(key, ()=>renderDoc(LEARN[key]));
+    if(key==='glossary') return showDoc(key, renderGlossary);
+    if(key==='news') return showDoc(key, ()=>renderNews('competitor'));
+    if(key==='sanofi-news') return showDoc(key, ()=>renderNews('sanofi'));
     $('view-basics').hidden=true; $('view-company').hidden=false;
     if(!ALL[key]) key='sanofi';
     D=ALL[key];
@@ -708,7 +1362,7 @@ footer{margin-top:40px;font-size:13px;color:var(--muted);border-top:1px solid va
   const GL = JSON.parse(document.getElementById('glossary').textContent);
   const reEsc = s => s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
   function acronyms(){
-    document.querySelectorAll('.view:not([hidden]) > header, .view:not([hidden]) section').forEach(sec=>{
+    document.querySelectorAll('.view:not([hidden]) > header, .view:not([hidden]) section:not(.noacr)').forEach(sec=>{
       sec.querySelectorAll('.acr').forEach(n=>n.remove());
       const txt = sec.textContent;
       const hits = GL.map(g=>{
@@ -724,11 +1378,18 @@ footer{margin-top:40px;font-size:13px;color:var(--muted);border-top:1px solid va
     });
   }
 
+  function go(key){
+    render(key);
+    try{ history.replaceState(null,'','#'+key); }catch(err){}
+    window.scrollTo({top:0});
+  }
   document.querySelector('nav.rail').addEventListener('click',e=>{
     const a=e.target.closest('a[data-key]'); if(!a) return;
-    e.preventDefault(); render(a.dataset.key);
-    try{ history.replaceState(null,'','#'+a.dataset.key); }catch(err){}
-    window.scrollTo({top:0});
+    e.preventDefault(); go(a.dataset.key);
+  });
+  document.getElementById('top').addEventListener('click',e=>{
+    const a=e.target.closest('a[data-go]'); if(!a) return;
+    e.preventDefault(); go(a.dataset.go);
   });
   render((location.hash||'').replace('#',''));
   try{

@@ -1,4 +1,4 @@
-# Vaccine Market Atlas
+# Vaccine Market Intelligence
 
 Internal resource for Sanofi's Competitive Intelligence work, part of Vaccine Performance and Innovation team  (Vaccines, Performance and Innovation team). Not an official Sanofi website.
 

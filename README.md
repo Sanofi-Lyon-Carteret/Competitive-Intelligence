@@ -6,7 +6,7 @@ Public, official sources only. No confidential Sanofi data.
 
 ## Pages
 - Company profiles: Sanofi, Moderna, GSK, MSD, Pfizer, AstraZeneca
-- Learn: Like I'm 5, Vaccine basics, Marketplace, Price types and rules, Glossary
+- Learn: Vaccine basics, Marketplace, Price types and rules, Glossary
 - Today: Competitor news, Sanofi update (7-day news log)
 
 ## How to edit
@@ -14,7 +14,7 @@ All content lives in `index.html`, in the data blocks marked:
 - `EDIT HERE` (company pages)
 - `ACRONYMS` (acronym glossary)
 - `VACCINE BASICS PAGE`
-- `LEARN PAGES` (Like I'm 5, Marketplace, Price types)
+- `LEARN PAGES` (Marketplace, Price types)
 - `GLOSSARY` (extra terms)
 - `TODAY PAGES` (news log)
 

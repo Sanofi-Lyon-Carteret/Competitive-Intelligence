@@ -1339,7 +1339,7 @@ footer{margin-top:40px;font-size:13px;color:var(--muted);border-top:1px solid va
       if(!hits.length) return;
       const p = document.createElement('p');
       p.className = 'acr';
-      p.innerHTML = '<b>Acronyms in this section</b>' + hits.map(h=>'<span><abbr>'+esc(h.g.k)+'</abbr>: '+esc(h.g.v)+'</span>').join('');
+      p.innerHTML = hits.map(h=>'<span><abbr>'+esc(h.g.k)+'</abbr>: '+esc(h.g.v)+'</span>').join('');
       sec.appendChild(p);
     });
   }
